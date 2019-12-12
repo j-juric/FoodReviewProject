@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "787768787478",
+    "firebase_url": "https://food-review-875e9.firebaseio.com",
+    "project_id": "food-review-875e9",
+    "storage_bucket": "food-review-875e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787768787478:android:a028630cf5bf10ccfb2b37",
+        "android_client_info": {
+          "package_name": "com.example.foodreview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787768787478-1ub20s0sbdohpv2uj3ad3c4cnarp0j49.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.foodreview",
+            "certificate_hash": "6ca85e64d6f99a3c8a9f4e60b8583bc43c4ff839"
+          }
+        },
+        {
+          "client_id": "787768787478-t9gn3ala370r3sae6ij0q9kc9vfgj1ni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqFleUaA36gM7JhxUeIihfr5K3jlJmTSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787768787478-t9gn3ala370r3sae6ij0q9kc9vfgj1ni.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
