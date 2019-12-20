@@ -1,4 +1,4 @@
-package com.example.foodreview
+package com.food.review
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -21,29 +21,31 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
         //var bottomNav:BottomNavigationView=findViewById(R.id.bottom_navigation)
         var nav_view=findViewById(R.id.bottom_navigation) as BottomNavigationView
         nav_view!!.setOnNavigationItemSelectedListener(this)
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,HomeFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+            HomeFragment()
+        ).commit()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         var selectedFragment:Fragment?=null
         when (item.itemId) {
             R.id.nav_home -> {
-                selectedFragment=HomeFragment()
+                selectedFragment= HomeFragment()
                 setTitle("Home")
             }
             R.id.nav_reviews -> {
-                selectedFragment=ReviewFragment()
+                selectedFragment= ReviewFragment()
                 setTitle("Reviews")
             }
             R.id.nav_scan -> {
                 setTitle("Scan")
             }
             R.id.nav_reservations -> {
-                selectedFragment=BookingFragment()
+                selectedFragment= BookingFragment()
                 setTitle("Reservations")
             }
             R.id.nav_user -> {
-                selectedFragment=ProfileFragment()
+                selectedFragment= ProfileFragment()
                 setTitle("User")
             }
         }

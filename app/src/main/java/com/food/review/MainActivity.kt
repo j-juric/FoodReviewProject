@@ -1,4 +1,4 @@
-package com.example.foodreview
+package com.food.review
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         login=findViewById(R.id.button)
         login!!.setOnClickListener{
-            val intent= Intent(this,MainMenu::class.java)
+            val intent= Intent(this, MainMenu::class.java)
             startActivity(intent)
         }
 

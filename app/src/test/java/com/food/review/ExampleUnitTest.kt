@@ -1,4 +1,4 @@
-package com.example.foodreview
+package com.food.review
 
 import org.junit.Test
 

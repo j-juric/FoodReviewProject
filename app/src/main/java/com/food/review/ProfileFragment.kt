@@ -1,4 +1,5 @@
-package com.example.foodreview
+package com.food.review
+
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +10,10 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 
 
-class HomeFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     @Nullable
     override fun onCreateView(@NonNull inflater:LayoutInflater, @Nullable container:ViewGroup?, @Nullable savedInstaceState:Bundle?):View?{
-        return inflater.inflate(R.layout.fragment_home,container,false)
+        return inflater.inflate(R.layout.fragment_profile,container,false)
     }
 }

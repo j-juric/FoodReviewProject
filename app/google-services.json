@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:280775410611:android:dd6a754d3b91fa1521c1c6",
+        "mobilesdk_app_id": "1:280775410611:android:0dc6ee9cf5f60b7721c1c6",
         "android_client_info": {
-          "package_name": "com.example.foodreview"
+          "package_name": "com.food.review"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "280775410611-d8rka03gg6c53akvmo7csri24rlmqsh8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.food.review",
+            "certificate_hash": "6ca85e64d6f99a3c8a9f4e60b8583bc43c4ff839"
+          }
+        },
         {
           "client_id": "280775410611-8aieluipgtueus3jnflt7v2v60ol3nqp.apps.googleusercontent.com",
           "client_type": 3
