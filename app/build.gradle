@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -44,3 +43,5 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
 
 }
+
+apply plugin: 'com.google.gms.google-services'
