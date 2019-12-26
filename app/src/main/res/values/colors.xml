@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="profileCol1_ar">#4C57A0</color>
+    <color name="profileCol2_ar">#4B0720</color>
+    <color name="iconColor_ar">#631212</color>
 </resources>
