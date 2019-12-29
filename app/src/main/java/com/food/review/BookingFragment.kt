@@ -3,13 +3,14 @@ package com.food.review
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_booking.*
 import java.text.DateFormat
@@ -21,8 +22,13 @@ class BookingFragment : Fragment() {
 
 
 
-    var formate = SimpleDateFormat("dd MMM, YYYY",Locale.US)
-    var timeFormat = SimpleDateFormat("hh:mm a", Locale.US)
+    lateinit var optionsSpinner:Spinner
+    lateinit var  result:TextView
+    var formate = SimpleDateFormat("dd MMM, YYYY",Locale.FRANCE)
+    var timeFormat = SimpleDateFormat("hh:mm a", Locale.FRANCE)
+
+
+
     @Nullable
     override fun onCreateView(@NonNull inflater:LayoutInflater, @Nullable container:ViewGroup?, @Nullable savedInstaceState:Bundle?):View?{
         val inflate= inflater.inflate(R.layout.fragment_booking,container,false)
@@ -31,7 +37,7 @@ class BookingFragment : Fragment() {
         //txt.text="jeej"
 
 
-        //region btn Date
+        //region btnDate
         val btn_Date=inflate.findViewById<TextView>(R.id.btn_booking_date)
         btn_Date.setOnClickListener {
             val now = Calendar.getInstance()
@@ -61,7 +67,7 @@ class BookingFragment : Fragment() {
         }
 //endregion
 
-//region btnDate
+        //region btnTame
         val btn_Time=inflate.findViewById<TextView>(R.id.btn_booking_time)
         btn_Time.setOnClickListener {
 
@@ -90,6 +96,36 @@ class BookingFragment : Fragment() {
 
 
         //endregion
+
+        //region Spinner
+
+        optionsSpinner=inflate.findViewById(R.id.spinn_booking_numPeople)
+        result=inflate.findViewById(R.id.res_spinner)
+        val arrayOptions= arrayListOf<Int>()
+        for(i in 1..25){
+
+            arrayOptions+=i
+        }
+        Log.d("booking br",arrayOptions.toString())
+        optionsSpinner.adapter=ArrayAdapter<Int>(context!!,android.R.layout.simple_spinner_item,arrayOptions)
+        optionsSpinner.onItemSelectedListener=object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                Toast.makeText(context!!, "position : " + position, Toast.LENGTH_SHORT).show()
+                Log.d("booking",arrayOptions[position].toString())
+                result.text=arrayOptions[position].toString()
+                   }
+        }
+        //endregion
+
+
+
 
         return inflate
     }
