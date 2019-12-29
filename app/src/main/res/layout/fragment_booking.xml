@@ -3,10 +3,30 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/proba"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BOOKING"
         android:textSize="50sp"
         android:layout_centerInParent="true"
         />
+
+
+    <Button
+        android:id="@+id/btn_booking_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chose date"
+        android:layout_margin="6px"
+
+        ></Button>
+
+    <Button
+        android:id="@+id/btn_booking_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/proba"
+        android:layout_centerInParent="true"
+
+        android:text="Chose time"></Button>
 </RelativeLayout>
