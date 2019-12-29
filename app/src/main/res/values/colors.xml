@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#909B9A</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
     <color name="profileCol1_ar">#4C57A0</color>
     <color name="profileCol2_ar">#4B0720</color>
     <color name="iconColor_ar">#631212</color>
+
+    <color name="bookingColor1_ar">#595A74</color>
 </resources>
