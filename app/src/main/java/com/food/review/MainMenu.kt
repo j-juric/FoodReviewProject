@@ -10,7 +10,8 @@ import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 
-class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+
+class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener  {
 
 
 
@@ -40,6 +41,7 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
                 setTitle("Reviews")
             }
             R.id.nav_scan -> {
+                selectedFragment= ScanFragment()
                 setTitle("Scan")
             }
             R.id.nav_reservations -> {

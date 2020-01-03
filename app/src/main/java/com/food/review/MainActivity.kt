@@ -14,6 +14,12 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
 import kotlinx.android.synthetic.main.activity_main.*
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -29,7 +35,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         /////////////////////////
         mAuth = FirebaseAuth.getInstance()
         database= Database(mAuth!!)
-
+        var email=this.fieldEmail
+        email.setText("test2@test.com")
+        var password=this.fieldPassword
+        password.setText("test1234")
 
 
         //////////////////////////
@@ -74,6 +83,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                     val user = mAuth!!.currentUser
                     Toast.makeText(baseContext, "LOG IN SUCCESSFUL.",
                         Toast.LENGTH_SHORT).show()
+
+                    val intent= Intent(this, MainMenu::class.java)
+                    startActivity(intent)
+
                     //updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
