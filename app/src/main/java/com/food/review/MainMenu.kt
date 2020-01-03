@@ -1,5 +1,5 @@
 package com.food.review
-
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +10,7 @@ import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 
-
-class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener  {
+class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
 
 
@@ -23,7 +22,7 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
         var nav_view=findViewById(R.id.bottom_navigation) as BottomNavigationView
         nav_view!!.setOnNavigationItemSelectedListener(this)
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
-            HomeFragment()
+            HomeFragment(this)
         ).commit()
 
 
@@ -33,11 +32,11 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
         var selectedFragment:Fragment?=null
         when (item.itemId) {
             R.id.nav_home -> {
-                selectedFragment= HomeFragment()
+                selectedFragment= HomeFragment(this)
                 setTitle("Home")
             }
             R.id.nav_reviews -> {
-                selectedFragment= ReviewFragment()
+                selectedFragment= ReviewFragment(this)
                 setTitle("Reviews")
             }
             R.id.nav_scan -> {
