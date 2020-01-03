@@ -1,11 +1,11 @@
 package com.food.review
 
-class dish(name:String,description:String,ingred:String)
+data class dish(val name:String,val description:String,val ingred:String)
 {
-    var name:String=name
-    val description:String=description
-    var ingred:String=ingred
-
+    enum class Type{
+        MAIN, DESERT, SALAD, BEV
+    }
+    lateinit var type:Type
     var grade:Float=-1.0f
     var numOfRev:Float=0.0f
     var sumGrade:Float=0.0f
