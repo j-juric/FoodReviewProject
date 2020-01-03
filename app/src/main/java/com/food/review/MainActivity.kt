@@ -2,28 +2,44 @@ package com.food.review
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener{
 
-    var login:Button?=null
+    var database:Database?=null
+    var mAuth:FirebaseAuth?=null
+    //var login:Button?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        login=findViewById(R.id.button)
-        login!!.setOnClickListener{
-            val intent= Intent(this, MainMenu::class.java)
-            startActivity(intent)
-        }
+        this.login.setOnClickListener(this)
+        this.register.setOnClickListener(this)
+        Log.d("TAGG", "onCreate.")
+        /////////////////////////
+        mAuth = FirebaseAuth.getInstance()
+        database= Database(mAuth!!)
 
 
+
+        //////////////////////////
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("TAGG", "onStart.")
+        //var currentUser = mAuth!!.currentUser
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -41,4 +57,133 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun signIn(email: String, password: String) {
+        Log.d("TAGG", "signIn:$email")
+        if (!validateForm(email,password)) {
+            return
+        }
+
+        //showProgressBar()
+
+        // [START sign_in_with_email]
+        mAuth!!.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("TAGG", "signInWithEmail:success")
+                    val user = mAuth!!.currentUser
+                    Toast.makeText(baseContext, "LOG IN SUCCESSFUL.",
+                        Toast.LENGTH_SHORT).show()
+                    //updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("TAGG", "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "LOG IN FAILED.",
+                        Toast.LENGTH_SHORT).show()
+                    //updateUI(null)
+                }
+
+                // [START_EXCLUDE]
+
+                //hideProgressBar()
+                // [END_EXCLUDE]
+            }
+        // [END sign_in_with_email]
+    }
+
+    private fun createAccount(email: String, password: String) {
+        Log.d("TAGG", "createAccount:$email")
+        if (!validateForm(email,password)) {
+            return
+        }
+
+        //showProgressBar()
+
+        // [START create_user_with_email]
+        mAuth!!.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("TAGG", "createUserWithEmail:success")
+                    val user = mAuth!!.currentUser
+                    Toast.makeText(baseContext, "Bravo ti ga batko.",
+                        Toast.LENGTH_SHORT).show()
+                    //updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("TAGG", "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                    //updateUI(null)
+                }
+
+                // [START_EXCLUDE]
+                //hideProgressBar()
+                // [END_EXCLUDE]
+            }
+        // [END create_user_with_email]
+    }
+
+    private fun sendEmailVerification() {
+        // [START send_email_verification]
+        val auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+
+        user?.sendEmailVerification()
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("TAGG", "Email sent.")
+                }
+            }
+        // [END send_email_verification]
+    }
+
+    private fun sendPasswordReset() {
+        // [START send_password_reset]
+        val auth = FirebaseAuth.getInstance()
+        val emailAddress = "user@example.com"
+
+        auth.sendPasswordResetEmail(emailAddress)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("TAGG", "Email sent.")
+                }
+            }
+        // [END send_password_reset]
+    }
+
+
+
+    private fun validateForm(email:String,password:String): Boolean {
+        var valid = true
+        Log.d("TAGG", "Validate Form.")
+        //val email = fieldEmail.text.toString()
+        if (TextUtils.isEmpty(email)) {
+            fieldEmail.error = "Required."
+            valid = false
+        } else {
+            fieldEmail.error = null
+        }
+
+        //val password = fieldPassword.text.toString()
+        if (TextUtils.isEmpty(password)) {
+            fieldPassword.error = "Required."
+            valid = false
+        } else {
+            fieldPassword.error = null
+        }
+
+        return valid
+    }
+
+    override fun onClick(v: View) {
+        val i = v.id
+        Log.d("TAGG", "Click.")
+        when (i) {
+            R.id.register -> createAccount(fieldEmailRegister.text.toString(), fieldPasswordRegister.text.toString())
+            R.id.login -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
+        }
+    }
+
 }

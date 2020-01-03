@@ -20,6 +20,8 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
             HomeFragment(this)
         ).commit()
+
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
