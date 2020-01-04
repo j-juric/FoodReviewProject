@@ -1,6 +1,6 @@
 package com.food.review
 
-data class dish(val name:String,val description:String,val ingred:String)
+data class Dish(val name:String, val description:String, val ingred:String)
 {
     enum class Type{
         MAIN, DESERT, SALAD, BEV

@@ -196,7 +196,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         when (i) {
             R.id.register -> createAccount(fieldEmailRegister.text.toString(), fieldPasswordRegister.text.toString())
             R.id.login -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
+            R.id.testing -> openTesting()
         }
+    }
+
+    fun openTesting(){
+        val intent= Intent(this,DatabseTestingActivity::class.java)
+        startActivity(intent)
     }
 
 }

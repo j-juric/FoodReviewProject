@@ -1,9 +1,9 @@
 package com.food.review
 
 
-open class user( name:String,  lastName:String,  email:String, id: String)
+open class User(firstName:String, lastName:String, email:String, id: String)
 {
-    val name:String=name
+    val firstName:String=firstName
         get()=field
     val lastName:String=lastName
         get()=field

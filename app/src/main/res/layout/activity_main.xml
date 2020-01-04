@@ -79,4 +79,11 @@
 
         </Button>
     </LinearLayout>
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Database testing"
+        android:layout_gravity="center"
+        android:id="@+id/testing"/>
 </LinearLayout>

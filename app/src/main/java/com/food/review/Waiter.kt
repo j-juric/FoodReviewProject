@@ -1,6 +1,6 @@
 package com.food.review
 
-class waiter(name:String,lastName:String,email:String, id:String):user(name,lastName,email,id) {
+class Waiter(name:String, lastName:String, email:String, id:String):User(name,lastName,email,id) {
     fun generateQR() {
 
     }

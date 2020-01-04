@@ -1,11 +1,10 @@
 package com.food.review
 
-import java.time.LocalDate
 import java.util.*
 
-class review(user:user, grade:Float, date: Date, text:String)
+class Review(user:User, grade:Float, date: Date, text:String)
 {
-    val user:user=user
+    val user:User=user
     get()=field
 
     val grade:Float=grade

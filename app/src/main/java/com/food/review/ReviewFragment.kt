@@ -1,9 +1,7 @@
 package com.food.review
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
-import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -19,10 +17,10 @@ import androidx.fragment.app.Fragment
 
 class ReviewFragment(val applicationContext: Context) : Fragment() {
     var table : TableLayout?=null
-    var arr:ArrayList<dish> = ArrayList()
+    var arr:ArrayList<Dish> = ArrayList()
 
-    var dish1:dish= dish("burger","cheese","pickles")
-    var dish2:dish= dish("pizza","hawaiian","pinapple")
+    var dish1:Dish= Dish("burger","cheese","pickles")
+    var dish2:Dish= Dish("pizza","hawaiian","pinapple")
 
 
     private lateinit var viewOfLayout: View

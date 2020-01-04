@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.util.*
 
 @TargetApi(Build.VERSION_CODES.O)
-class table(numOfPeople:Int, id:String)
+class Table(numOfPeople:Int, id:String)
 {
     var date:Date=Date(0,0,0)
     // dva niza sa brojevima ili jbmliga
