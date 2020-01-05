@@ -22,23 +22,15 @@ import java.time.Month
 import java.util.*
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment(val user:Customer) : Fragment() {
 
-
-
-
-
-
+    val tagg:String="TAGG"
     @RequiresApi(Build.VERSION_CODES.O)
     @Nullable
     override fun onCreateView(@NonNull inflater:LayoutInflater, @Nullable container:ViewGroup?, @Nullable savedInstaceState:Bundle?):View?{
 
        //Log.d("sanja1",profile_name_surname.text.toString())
-
-
-
-
-
+        Log.d(tagg,user.toString())
       /*NIKOLA PISAO:
         var korisnik=customer("asd","sddd","dsd","111")
         val simpleDate = SimpleDateFormat("dd/MM/yyyy")

@@ -1,7 +1,7 @@
 package com.food.review
 
 import java.util.*
-
+/*
 class recepit(price:Float, id:String, date: Date, Waiter:Waiter)
 {
     val price:Float=price
@@ -22,3 +22,4 @@ class recepit(price:Float, id:String, date: Date, Waiter:Waiter)
         grades.add(grade)
     }
 }
+*/

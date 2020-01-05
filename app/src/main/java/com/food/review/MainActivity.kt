@@ -1,6 +1,7 @@
 package com.food.review
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -11,39 +12,34 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 
 
 import kotlinx.android.synthetic.main.activity_main.*
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+import androidx.viewpager.widget.ViewPager
+import com.google.firebase.database.FirebaseDatabase
 
 
+class MainActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionListener,RegisterFragment.OnFragmentInteractionListener/*, View.OnClickListener*/{
+    override fun onFragmentInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-class MainActivity : AppCompatActivity(), View.OnClickListener{
-
-    var database:Database?=null
-    var mAuth:FirebaseAuth?=null
     //var login:Button?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        this.login.setOnClickListener(this)
-        this.register.setOnClickListener(this)
-        this.testing.setOnClickListener(this)
+//        this.login.setOnClickListener(this)
+//        this.register.setOnClickListener(this)
+//        this.testing.setOnClickListener(this)
         Log.d("TAGG", "onCreate.")
-        /////////////////////////
-        mAuth = FirebaseAuth.getInstance()
-        database= Database(mAuth!!)
-        var email=this.fieldEmail
-        email.setText("test2@test.com")
-        var password=this.fieldPassword
-        password.setText("test1234")
-
-
-        //////////////////////////
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+        val fragment = LoginFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_fragment_container, fragment)
+        transaction.commit()
     }
 
     override fun onStart() {
@@ -67,7 +63,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             else -> super.onOptionsItemSelected(item)
         }
     }
-
+/*
     private fun signIn(email: String, password: String) {
         Log.d("TAGG", "signIn:$email")
         if (!validateForm(email,password)) {
@@ -105,7 +101,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             }
         // [END sign_in_with_email]
     }
+  */
 
+/*
     private fun createAccount(email: String, password: String) {
         Log.d("TAGG", "createAccount:$email")
         if (!validateForm(email,password)) {
@@ -138,68 +136,40 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             }
         // [END create_user_with_email]
     }
-
-    private fun sendEmailVerification() {
-        // [START send_email_verification]
-        val auth = FirebaseAuth.getInstance()
-        val user = auth.currentUser
-
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d("TAGG", "Email sent.")
-                }
-            }
-        // [END send_email_verification]
-    }
-
-    private fun sendPasswordReset() {
-        // [START send_password_reset]
-        val auth = FirebaseAuth.getInstance()
-        val emailAddress = "user@example.com"
-
-        auth.sendPasswordResetEmail(emailAddress)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d("TAGG", "Email sent.")
-                }
-            }
-        // [END send_password_reset]
-    }
+*/
 
 
+//    private fun validateForm(email:String,password:String): Boolean {
+//        var valid = true
+//        Log.d("TAGG", "Validate Form.")
+//        //val email = fieldEmail.text.toString()
+//        if (TextUtils.isEmpty(email)) {
+//            fieldEmail.error = "Required."
+//            valid = false
+//        } else {
+//            fieldEmail.error = null
+//        }
+//
+//        //val password = fieldPassword.text.toString()
+//        if (TextUtils.isEmpty(password)) {
+//            fieldPassword.error = "Required."
+//            valid = false
+//        } else {
+//            fieldPassword.error = null
+//        }
+//
+//        return valid
+//    }
 
-    private fun validateForm(email:String,password:String): Boolean {
-        var valid = true
-        Log.d("TAGG", "Validate Form.")
-        //val email = fieldEmail.text.toString()
-        if (TextUtils.isEmpty(email)) {
-            fieldEmail.error = "Required."
-            valid = false
-        } else {
-            fieldEmail.error = null
-        }
-
-        //val password = fieldPassword.text.toString()
-        if (TextUtils.isEmpty(password)) {
-            fieldPassword.error = "Required."
-            valid = false
-        } else {
-            fieldPassword.error = null
-        }
-
-        return valid
-    }
-
-    override fun onClick(v: View) {
-        val i = v.id
-        Log.d("TAGG", "Click.")
-        when (i) {
-            R.id.register -> createAccount(fieldEmailRegister.text.toString(), fieldPasswordRegister.text.toString())
-            R.id.login -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
-            R.id.testing -> openTesting()
-        }
-    }
+//    override fun onClick(v: View) {
+//        val i = v.id
+//        Log.d("TAGG", "Click.")
+//        when (i) {
+//            R.id.register -> createAccount(fieldEmailRegister.text.toString(), fieldPasswordRegister.text.toString())
+//            R.id.login -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
+//            R.id.testing -> openTesting()
+//        }
+//    }
 
     fun openTesting(){
         val intent= Intent(this,DatabseTestingActivity::class.java)

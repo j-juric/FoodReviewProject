@@ -23,6 +23,7 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
 
     /////[FETCHED_DATA_START]
     var arrayOfDishes: ArrayList<Dish> ?= null
+    var user:Customer=Customer()
     /////[FETCHED_DATA_END]
 
 
@@ -32,13 +33,16 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
-        //var bottomNav:BottomNavigationView=findViewById(R.id.bottom_navigation)
-//        var nav_view=findViewById(R.id.bottom_navigation) as BottomNavigationView
-//        nav_view!!.setOnNavigationItemSelectedListener(this)
+
+        user.id=intent.getStringExtra("Uid")
+        user.firstName=intent.getStringExtra("firstName")
+        user.lastName=intent.getStringExtra("lastName")
+        user.email=intent.getStringExtra("email")
+        user.credits=intent.getIntExtra("credits",0)
 
         Log.d(tag,"SETTING DATABASE PARAMETERS")
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true) //OVO NIKAKO NE DIRAJ!!! OVO JE PRVO STO MORA DA SE ISKORISTI OD BAZE U AKTIVITIJU
         database= FirebaseDatabase.getInstance()
+        Log.d(tag,"INSTANCE HAS BEEN DECLARED")
         databaseRef=FirebaseDatabase.getInstance().reference
         Log.d(tag,"DATABASE PARAMETERS HAVE BEEN SET")
 
@@ -103,7 +107,7 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
                 setTitle("Reservations")
             }
             R.id.nav_user -> {
-                selectedFragment= ProfileFragment()
+                selectedFragment= ProfileFragment(user)
                 setTitle("User")
             }
         }
@@ -114,7 +118,7 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
 
 
     fun getDishes(dataSnapshot:DataSnapshot){
-        arrayOfDishes=ArrayList()
+        arrayOfDishes= ArrayList()
         for(i in dataSnapshot.children){
             var dish = i.getValue(Dish::class.java)
             arrayOfDishes!!.add(dish!!)

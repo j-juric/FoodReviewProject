@@ -7,10 +7,14 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     >
+    <FrameLayout
+        android:id="@+id/main_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 
-
-    <LinearLayout
+    <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
 
@@ -85,5 +89,5 @@
         android:layout_weight="1"
         android:text="Database testing"
         android:layout_gravity="center"
-        android:id="@+id/testing"/>
+        android:id="@+id/testing"/> -->
 </LinearLayout>

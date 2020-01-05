@@ -25,7 +25,7 @@ class DatabseTestingActivity : AppCompatActivity() {
         databaseRef=FirebaseDatabase.getInstance().reference
         val ref=database!!.getReference("Database")
 
-        arrayOfDishes= ArrayList()
+        /*arrayOfDishes= ArrayList()
         var d1 = Dish("Carbonara","Italijanska pasta ciji su glavni sastojci neutralna pavlaka, jaja i slanina",0F,0,0F,Type.MAIN)
         var d2 = Dish("Bolognese","It consists of spaghetti served with a sauce made from tomatoes, minced beef, garlic, wine and herbs;",0F,0,0F,Type.MAIN)
         var d3 = Dish("Pesto","The original pesto alla genovese, the quintessential pesto recipe, is made with Genovese basil, coarse salt, garlic, Ligurian extra virgin olive oil (Taggiasco), European pine nuts (sometimes toasted) and a grated cheese like Parmigiano-Reggiano",0F,0,0F,Type.MAIN)
@@ -75,9 +75,9 @@ class DatabseTestingActivity : AppCompatActivity() {
         Log.d(tag, ref.toString())
         Log.d(tag,"INITIALIZING APP FROM PID: " + android.os.Process.myPid())
         Log.d(tag,"DISHES ADDED")
+        */
 
         //databaseRef!!.child("Database").child(userId).child("username").setValue(name)
-
     }
 
     fun getDishes(dataSnapshot:DataSnapshot){
