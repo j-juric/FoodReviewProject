@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         setContentView(R.layout.activity_main)
         this.login.setOnClickListener(this)
         this.register.setOnClickListener(this)
+        this.testing.setOnClickListener(this)
         Log.d("TAGG", "onCreate.")
         /////////////////////////
         mAuth = FirebaseAuth.getInstance()

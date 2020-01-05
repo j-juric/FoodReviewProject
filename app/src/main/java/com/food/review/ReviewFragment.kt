@@ -14,22 +14,17 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 
-
-class ReviewFragment(val applicationContext: Context) : Fragment() {
+//arrayOfDishes je lista koja je dobijena iz baze
+class ReviewFragment(val applicationContext: Context,val arrayOfDishes: ArrayList<Dish>) : Fragment() {
     var table : TableLayout?=null
-    var arr:ArrayList<Dish> = ArrayList()
-
-    var dish1:Dish= Dish("burger","cheese","pickles")
-    var dish2:Dish= Dish("pizza","hawaiian","pinapple")
-
 
     private lateinit var viewOfLayout: View
 
     @Nullable
     override fun onCreateView(@NonNull inflater:LayoutInflater, @Nullable container:ViewGroup?, @Nullable savedInstaceState:Bundle?):View?{
         viewOfLayout = inflater.inflate(R.layout.fragment_review,container,false)
-        arr.add(dish1)
-        arr.add(dish2)
+        //arr.add(dish1)
+        //arr.add(dish2)
         draw()
 
         return viewOfLayout
@@ -38,7 +33,7 @@ class ReviewFragment(val applicationContext: Context) : Fragment() {
     fun draw(){
         this.table= viewOfLayout.findViewById(R.id.main_table)
         var i:Int=0
-        arr!!.forEach { d ->
+        arrayOfDishes!!.forEach { d ->
             var row = TableRow(applicationContext)
             row.layoutParams = TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT,
@@ -53,7 +48,9 @@ class ReviewFragment(val applicationContext: Context) : Fragment() {
 
             txtName.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f)
             val param1 = txtName.layoutParams as TableRow.LayoutParams
+
             txtName.setText(d.name)
+
             txtName.gravity= Gravity.CENTER
             row.addView(txtName)
            /* row.setOnClickListener{object : View.OnClickListener{
