@@ -1,12 +1,14 @@
 package com.food.review
 
 
+import android.app.AlertDialog
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
@@ -20,26 +22,51 @@ import java.time.LocalDate.of
 import java.time.LocalDate.parse
 import java.time.Month
 import java.util.*
+//import com.food.review.Database as
+import com.google.firebase.auth.FirebaseAuth
+import com.food.review.Database as FoodReviewDatabase
+import com.food.review.User as User1
 
 
 class ProfileFragment(val user:Customer) : Fragment() {
 
-    val tagg:String="TAGG"
+    val tagg:String="sanjja"
     @RequiresApi(Build.VERSION_CODES.O)
     @Nullable
     override fun onCreateView(@NonNull inflater:LayoutInflater, @Nullable container:ViewGroup?, @Nullable savedInstaceState:Bundle?):View?{
+       val inflate=inflater.inflate(R.layout.fragment_profile,container,false)
 
-       //Log.d("sanja1",profile_name_surname.text.toString())
-        Log.d(tagg,user.toString())
-      /*NIKOLA PISAO:
-        var korisnik=customer("asd","sddd","dsd","111")
-        val simpleDate = SimpleDateFormat("dd/MM/yyyy")
-       var rev=review(korisnik,5.0f,Date(1,1,1),"okomenesve")
-        korisnik.addReview(rev)
-        val strDt = simpleDate.format(rev.date)
-        Log.d("111 review+ customer", korisnik.lastName + strDt + rev.user.lastName + korisnik.reviews[0].text) //+ rev.grade.toString() + rev.date.toString() )
-       */
+        var fullName:String=user.firstName+" "+user.lastName
+        val txtName=inflate.findViewById<TextView>(R.id.txtFullName)
+        txtName.text=fullName
 
-        return inflater.inflate(R.layout.fragment_profile,container,false)
+        val txtEmail=inflate.findViewById<TextView>(R.id.tvEmail)
+        txtEmail.text=user.email
+
+        val txtNumber=inflate.findViewById<TextView>(R.id.tvNumber)
+        txtNumber.text=user.id
+
+        val txtPoints=inflate.findViewById<TextView>(R.id.tvPoints)
+        txtPoints.text=user.credits.toString()
+
+//region Dialog_za_ViewAllReviews
+
+        val btnViewAll=inflate.findViewById<TextView>(R.id.tvButton)
+        btnViewAll.setOnClickListener{
+            val dialog=AlertDialog.Builder(context)
+            val dialogView=layoutInflater.inflate(R.layout.custom_dialog,null)
+            //dialog.setView(dialogView)
+            dialog.setTitle("All Reviews")
+            dialog.setMessage("No review still :(")
+            dialog.setPositiveButton("Back",null)
+          //  dialog.setCancelable(false)
+            dialog.show()
+        }
+
+
+
+
+
+        return inflate
     }
 }

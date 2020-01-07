@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
-<LinearLayout
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -27,18 +27,18 @@
                 android:src="@drawable/defaultuser" />
 
             <TextView
-                    android:id="@+id/profile_name_surname"
-                    android:layout_marginTop="10dp"
-                android:text="test testic"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:textSize="21sp" />
+                android:id="@+id/txtFullName"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="21sp" ></TextView>
 
 
         </LinearLayout>
+
         <androidx.cardview.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="350dp"
@@ -48,6 +48,7 @@
             card_view:cardCornerRadius="10dp"
             card_view:cardBackgroundColor="#E5E8F5"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -69,9 +70,10 @@
                         android:paddingTop="10dp"
                         android:textColor="@color/profileCol1_ar"/>
                     <TextView
+                        android:id="@+id/tvPoints"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="123"
+
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:paddingTop="10dp"
@@ -108,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="test.test@gmail.com"/>
+               android:id="@+id/tvEmail"/>
 
         </LinearLayout>
 
@@ -128,12 +130,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="064 556573"/>
+                android:id="@+id/tvNumber"
+                />
 
         </LinearLayout>
 
         <Button
             android:textColor="#fff"
+            android:id="@+id/tvButton"
             android:background="@drawable/buttonstylegradient_ar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
