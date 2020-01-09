@@ -9,4 +9,5 @@
     <color name="iconColor_ar">#631212</color>
 
     <color name="bookingColor1_ar">#595A74</color>
+    <color name="reservation_small_btn">#BD1A1A</color>
 </resources>
