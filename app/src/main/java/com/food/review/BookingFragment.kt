@@ -1,5 +1,6 @@
 package com.food.review
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -177,6 +178,12 @@ class BookingFragment(val user:Customer) : Fragment() {
                    }
         }
         //endregion
+
+
+
+        val btnMyReservation=inflate.findViewById<Button>(R.id.btn_booking_btnMyReservation);
+
+
 
 
 
