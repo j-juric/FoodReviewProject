@@ -103,7 +103,7 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
                 setTitle("Scan")
             }
             R.id.nav_reservations -> {
-                selectedFragment= BookingFragment()
+                selectedFragment= BookingFragment(user)
                 setTitle("Reservations")
             }
             R.id.nav_user -> {

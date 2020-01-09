@@ -4,7 +4,8 @@ data class Customer( var firstName:String=""
                     ,  var lastName:String=""
                     , var email:String=""
                     , var id:String=""
-                    ,var credits: Int=0) {
+                    ,var credits: Int=0
+                    , var reservationTime:String="") {
     constructor():this("")
 
 }
