@@ -198,12 +198,12 @@ class RegisterFragment : Fragment() {
 
     private fun createAccount(firstName:String,lastName:String,email:String,password:String,repassword:String) {
         Log.d("TAGG", "createAccount:$email")
-//        if (!validateForm(firstName,lastName,email,password,repassword)) {
-//            return
-//        }
+        if (!validateForm(firstName,lastName,email,password,repassword)) {
+            return
+        }
 
         //showProgressBar()
-        val user:FirebaseUser?=null
+
         // [START create_user_with_email]
         mAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(activity as Activity) { task ->

@@ -5,11 +5,12 @@ import com.google.firebase.database.Exclude
 enum class Type{
     MAIN, DESERT, SALAD, BEV
 }
-data class Dish(val name:String = "",
-                val description:String = "",
+data class Dish(var name:String = "",
+                var description:String = "",
                 var grade:Float = 0f,
                 var numOfRev:Int = 0,
                 var sumGrade:Float = 0f,
+                var price:Float=0f,
                 val type:Type = Type.MAIN)
 {
     constructor():this("")

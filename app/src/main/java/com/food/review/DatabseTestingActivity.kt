@@ -3,10 +3,23 @@ package com.food.review
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+
+import androidmads.library.qrgenearator.QRGContents
+import androidmads.library.qrgenearator.QRGEncoder
+
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.activity_databse_testing.*
+import com.google.zxing.WriterException
+
+import android.graphics.Point
+
+import android.view.WindowManager
+
+import android.graphics.Bitmap
 import kotlin.random.Random
+
 
 class DatabseTestingActivity : AppCompatActivity() {
 
@@ -14,6 +27,10 @@ class DatabseTestingActivity : AppCompatActivity() {
     var databaseRef:DatabaseReference?=null
     var mAuth: FirebaseAuth?=null
     var arrayOfDishes: ArrayList<Dish> ?= null
+
+    var qrImage:ImageView ?=null
+    var bitmap: Bitmap? = null
+
 
     var reservations:ArrayList<Pair<String,ArrayList<Table>>>?=null
 
@@ -25,7 +42,8 @@ class DatabseTestingActivity : AppCompatActivity() {
         database= FirebaseDatabase.getInstance()
         databaseRef=FirebaseDatabase.getInstance().reference
 
-
+        Log.d(tag,"OTVORI SE SEZAME")
+        qrImage=this.QR_Image as ImageView
         //QUERY WHICH RETURNS DATA FOR THE NEXT 14 DAYS
 //        val last14days = databaseRef!!.child("Reservations").orderByKey()
 //            .startAt("20200120")
@@ -54,32 +72,53 @@ class DatabseTestingActivity : AppCompatActivity() {
 //        //SET LISTENER
 //        last14days.addValueEventListener(postListener)
 
+        val inputValue = "-LyFeDi8UN_KrSA8BuaU".trim()
+        val manager = getSystemService(WINDOW_SERVICE) as WindowManager
+        val display = manager.defaultDisplay
+        val point = Point()
+        display.getSize(point)
 
+        val width = point.x
+        val height = point.y
+        var smallerDimension = if (width < height) width else height
+        smallerDimension = smallerDimension * 3 / 4
 
+        var qrgEncoder = QRGEncoder(
+            inputValue, null,
+            QRGContents.Type.TEXT,
+            smallerDimension
+        )
+        try {
+            bitmap = qrgEncoder.bitmap
+            qrImage!!.setImageBitmap(bitmap)
+        } catch (e: WriterException) {
+            Log.d(tag, "GRESKA")
+        }
 
+        //val key = databaseRef!!.child("Receipts").push().key
 
-        var timeList:ArrayList<String> = ArrayList<String>(6)
-
-        timeList.add("12:00")
-        timeList.add("14:00")
-        timeList.add("16:00")
-        timeList.add("18:00")
-        timeList.add("20:00")
-        timeList.add("22:00")
-
-        var nameList:ArrayList<String> = ArrayList<String>(12)
-        nameList.add("Kolumbo")
-        nameList.add("Dubravka")
-        nameList.add("Trifun")
-        nameList.add("Svetozar")
-        nameList.add("Jefimije")
-        nameList.add("Pero")
-        nameList.add("Milo")
-        nameList.add("Ratislav")
-        nameList.add("Ratimir")
-        nameList.add("Svemirko")
-        nameList.add("Josif")
-        nameList.add("Ratko")
+//        var timeList:ArrayList<String> = ArrayList<String>(6)
+//
+//        timeList.add("12:00")
+//        timeList.add("14:00")
+//        timeList.add("16:00")
+//        timeList.add("18:00")
+//        timeList.add("20:00")
+//        timeList.add("22:00")
+//
+//        var nameList:ArrayList<String> = ArrayList<String>(12)
+//        nameList.add("Kolumbo")
+//        nameList.add("Dubravka")
+//        nameList.add("Trifun")
+//        nameList.add("Svetozar")
+//        nameList.add("Jefimije")
+//        nameList.add("Pero")
+//        nameList.add("Milo")
+//        nameList.add("Ratislav")
+//        nameList.add("Ratimir")
+//        nameList.add("Svemirko")
+//        nameList.add("Josif")
+//        nameList.add("Ratko")
 
 
 
@@ -114,20 +153,21 @@ class DatabseTestingActivity : AppCompatActivity() {
 
 
 
-        /*arrayOfDishes= ArrayList()
-        var d1 = Dish("Carbonara","Italijanska pasta ciji su glavni sastojci neutralna pavlaka, jaja i slanina",0F,0,0F,Type.MAIN)
-        var d2 = Dish("Bolognese","It consists of spaghetti served with a sauce made from tomatoes, minced beef, garlic, wine and herbs;",0F,0,0F,Type.MAIN)
-        var d3 = Dish("Pesto","The original pesto alla genovese, the quintessential pesto recipe, is made with Genovese basil, coarse salt, garlic, Ligurian extra virgin olive oil (Taggiasco), European pine nuts (sometimes toasted) and a grated cheese like Parmigiano-Reggiano",0F,0,0F,Type.MAIN)
-        var d4 = Dish("Quattro Fromaggi","Pasta Quattro Formaggi, which is Italian for 'Pasta with Four Cheeses'. The most commonly used cheese varieties for this recipe are parmesan, gorgonzola, fontina, and provolone or mozzarella.",0F,0,0F,Type.MAIN)
-        var d5 = Dish("Aglio e olio","Kaže se da kada bi postojala biblija o pastama, prva rečenica bi glasila, “U početku, Bog stvori “Aglio e Olio”. Drugim rečima, način na koji se danas pripremaju paste, Aglio e Olio je skoro uvek prvi korak.",0F,0,0F,Type.MAIN)
-        var d6 = Dish("Napolitana","Napolitana sos se još naziva i Napoli sos, odnosno Napuljski sos, a to je kolektivni naziv za svaki sos koji se bazira na umaku od paradajza, a potiče iz italijanske kuhinje.",0F,0,0F,Type.MAIN)
-        var d7 = Dish("Alfredo Tacchini","Alfredo sos je zapravo jedan od najstarijih i najjednostavnijih načina za pripremu testenine. Italijanska verzija ovog sosa sadrži puter i parmezan, dok je američka sa pavlakom i parmezanom.",0F,0,0F,Type.MAIN)
-        var d8 = Dish("Amatriciana","Amatriciana je tradicionalni italijanski pasta sos na bazi slanine, rendanog sira, paradajza i crnog luka. Poreklom je iz grada Amatrice i jedan je od najpoznatijih soseva za testenine rimske, odnosno italijanske kuhinje.",0F,0,0F,Type.MAIN)
-        var d9 = Dish("Funghi","Postoji puno recepta za sos sa pečurkama, ali ono što čini ovu pastu posebnom jeste savršen spoj sa pavlakom, belim lukom i parmezanom. Funghi sos za pastu je kremas, primamljv i divnog ukusa pa je sasvim opravdano jedan od najtraženijih u Pasta baru 2×2.",0F,0,0F,Type.MAIN)
-        var d10 = Dish("Arrabbiata","Arrabbiata sos je pikantan sos za testeninu, a napravljen je od belog i crnog luka, paradajza i crvene čili papričice, kuvanih u maslinovom ulju. Na italijanskom jeziku “arrabbiata” bukvalno znači “ljut” i odnosi se na ljutinu čili papričica koje se koriste za pripremu.",0F,0,0F,Type.MAIN)
-        var d11 = Dish("Nutella Pancakes","French Crapes with Nutella",0F,0,0F,Type.DESERT)
-        var d12 = Dish("Baklava","A traditional turkish desert",0F,0,0F,Type.DESERT)
-        var d13 = Dish("Apple Pie","Typical American pie",0F,0,0F,Type.DESERT)
+        arrayOfDishes= ArrayList()
+        /*
+        var d1 = Dish("Carbonara","Italijanska pasta ciji su glavni sastojci neutralna pavlaka, jaja i slanina",0F,0,0F,30,Type.MAIN)
+        var d2 = Dish("Bolognese","It consists of spaghetti served with a sauce made from tomatoes, minced beef, garlic, wine and herbs;",0F,0,0F,30,Type.MAIN)
+        var d3 = Dish("Pesto","The original pesto alla genovese, the quintessential pesto recipe, is made with Genovese basil, coarse salt, garlic, Ligurian extra virgin olive oil (Taggiasco), European pine nuts (sometimes toasted) and a grated cheese like Parmigiano-Reggiano",0F,0,0F,35,Type.MAIN)
+        var d4 = Dish("Quattro Fromaggi","Pasta Quattro Formaggi, which is Italian for 'Pasta with Four Cheeses'. The most commonly used cheese varieties for this recipe are parmesan, gorgonzola, fontina, and provolone or mozzarella.",0F,0,0F,50,Type.MAIN)
+        var d5 = Dish("Aglio e olio","Kaže se da kada bi postojala biblija o pastama, prva rečenica bi glasila, “U početku, Bog stvori “Aglio e Olio”. Drugim rečima, način na koji se danas pripremaju paste, Aglio e Olio je skoro uvek prvi korak.",0F,0,0F,35,Type.MAIN)
+        var d6 = Dish("Napolitana","Napolitana sos se još naziva i Napoli sos, odnosno Napuljski sos, a to je kolektivni naziv za svaki sos koji se bazira na umaku od paradajza, a potiče iz italijanske kuhinje.",0F,0,0F,40,Type.MAIN)
+        var d7 = Dish("Alfredo Tacchini","Alfredo sos je zapravo jedan od najstarijih i najjednostavnijih načina za pripremu testenine. Italijanska verzija ovog sosa sadrži puter i parmezan, dok je američka sa pavlakom i parmezanom.",0F,0,0F,50,Type.MAIN)
+        var d8 = Dish("Amatriciana","Amatriciana je tradicionalni italijanski pasta sos na bazi slanine, rendanog sira, paradajza i crnog luka. Poreklom je iz grada Amatrice i jedan je od najpoznatijih soseva za testenine rimske, odnosno italijanske kuhinje.",0F,0,0F,60,Type.MAIN)
+        var d9 = Dish("Funghi","Postoji puno recepta za sos sa pečurkama, ali ono što čini ovu pastu posebnom jeste savršen spoj sa pavlakom, belim lukom i parmezanom. Funghi sos za pastu je kremas, primamljv i divnog ukusa pa je sasvim opravdano jedan od najtraženijih u Pasta baru 2×2.",0F,0,0F,45,Type.MAIN)
+        var d10 = Dish("Arrabbiata","Arrabbiata sos je pikantan sos za testeninu, a napravljen je od belog i crnog luka, paradajza i crvene čili papričice, kuvanih u maslinovom ulju. Na italijanskom jeziku “arrabbiata” bukvalno znači “ljut” i odnosi se na ljutinu čili papričica koje se koriste za pripremu.",0F,0,0F,50,Type.MAIN)
+        var d11 = Dish("Nutella Pancakes","French Crapes with Nutella",0F,0,0F,35,Type.DESERT)
+        var d12 = Dish("Baklava","A traditional turkish desert",0F,0,0F,40,Type.DESERT)
+        var d13 = Dish("Apple Pie","Typical American pie",0F,0,0F,48,Type.DESERT)
 
         databaseRef!!.child("Dishes").child(d1.name).setValue(d1)
         databaseRef!!.child("Dishes").child(d2.name).setValue(d2)
@@ -142,7 +182,7 @@ class DatabseTestingActivity : AppCompatActivity() {
         databaseRef!!.child("Dishes").child(d11.name).setValue(d11)
         databaseRef!!.child("Dishes").child(d12.name).setValue(d12)
         databaseRef!!.child("Dishes").child(d13.name).setValue(d13)
-
+        */
         var dref:DatabaseReference=databaseRef!!.child("Dishes")
 
         val postListener = object : ValueEventListener {
@@ -161,10 +201,8 @@ class DatabseTestingActivity : AppCompatActivity() {
             }
         }
         dref.addValueEventListener(postListener)
-        Log.d(tag, ref.toString())
-        Log.d(tag,"INITIALIZING APP FROM PID: " + android.os.Process.myPid())
-        Log.d(tag,"DISHES ADDED")
-        */
+
+
 
         //databaseRef!!.child("Database").child(userId).child("username").setValue(name)
     }
@@ -174,9 +212,38 @@ class DatabseTestingActivity : AppCompatActivity() {
             var dish = i.getValue(Dish::class.java)
             arrayOfDishes!!.add(dish!!)
         }
-        for( i in arrayOfDishes!!){
-            Log.d(tag,i.toString())
+        generateReceipts(arrayOfDishes!!)
+
+    }
+
+    fun generateReceipts( arr:ArrayList<Dish>){
+
+        //var count= arr.size
+        for (itr in 1..100){
+            var r = Receipt(0f)
+            var i= Random.nextInt(0,12)
+            var j=Random.nextInt(0,12)
+            while(j==i)
+                j=Random.nextInt(0,12)
+            var ic= Random.nextInt(1,3)
+            var jc= Random.nextInt(1,3)
+
+            var isum= ic * arr[i].price
+            var jsum= jc * arr[j].price
+
+            var map = HashMap<String,Int>()
+
+            map.set(arr[i].name,ic)
+            map.set(arr[j].name,jc)
+
+            var k= databaseRef!!.child("Receipts").push().key
+            r.bill=(isum+jsum)
+            r.orders=map
+            databaseRef!!.child("Receipts").child(k!!).setValue(r)
+
         }
+
+
     }
 
 

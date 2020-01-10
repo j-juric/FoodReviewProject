@@ -18,40 +18,80 @@ import androidx.fragment.app.Fragment
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView
 import kotlinx.android.synthetic.main.fragment_scan.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.firebase.database.*
 
 
-class ScanFragment: Fragment() , QRCodeReaderView.OnQRCodeReadListener {
+class ScanFragment(val id:String): Fragment() , QRCodeReaderView.OnQRCodeReadListener {
+
 
 
     var myView: View? = null
     var qrCodeReaderView: QRCodeReaderView? = null
     var resultTextView: TextView? = null
     var flag:Boolean=true
+
+    var databaseRef: DatabaseReference?=null
+    var scanListener: ValueEventListener?=null
+    var receiptText:String?=null
+
     @Nullable
     override fun onCreateView(@NonNull inflater:LayoutInflater, @Nullable container:ViewGroup?, @Nullable savedInstaceState:Bundle?):View?{
 
+        //setContentView(R.layout.activity_main_menu)
+
         verifyPremission()
 
+        databaseRef= FirebaseDatabase.getInstance().reference
+
         myView = inflater.inflate(R.layout.fragment_scan,container,false)
+
 
         qrCodeReaderView=myView!!.findViewById(R.id.qr_decoder_view) as QRCodeReaderView
         resultTextView=myView!!.findViewById(R.id.result_text)
 
         Log.d("TAGG",qrCodeReaderView.toString())
 
-        qrCodeReaderView!!.setOnQRCodeReadListener(this);
+        qrCodeReaderView!!.setOnQRCodeReadListener(this)
 
         // Use this function to enable/disable decoding
-        qrCodeReaderView!!.setQRDecodingEnabled(true);
+        qrCodeReaderView!!.setQRDecodingEnabled(true)
 
         // Use this function to change the autofocus interval (default is 5 secs)
-        qrCodeReaderView!!.setAutofocusInterval(2000);
+        qrCodeReaderView!!.setAutofocusInterval(2000)
 
 
         // Use this function to set back camera preview
-        qrCodeReaderView!!.setBackCamera();
+        qrCodeReaderView!!.setBackCamera()
+
+        scanListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if(dataSnapshot.exists()){
+
+                    var receipt = dataSnapshot.getValue(Receipt::class.java)
+                    if (receipt!!.scanned){
+                        Toast.makeText(activity, "It appears the code has already been scanned", Toast.LENGTH_LONG).show()
+                    }
+                    val fragment = RateFragment(receipt,id,dataSnapshot.key!!)
+                    val fragmentManager = activity!!.supportFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.fragment_container, fragment)
+                    fragmentTransaction.addToBackStack(null)
+                    fragmentTransaction.commit()
+
+
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
+                Toast.makeText(activity, "On cancel", Toast.LENGTH_LONG).show()
+                // ...
+            }
+        }
 
         return myView
     }
@@ -68,14 +108,15 @@ class ScanFragment: Fragment() , QRCodeReaderView.OnQRCodeReadListener {
 
     override fun onPause() {
         super.onPause()
-        qrCodeReaderView!!.startCamera()
+        qrCodeReaderView!!.stopCamera()
     }
 
     override fun onQRCodeRead(text: String?, points: Array<out PointF>?) {
 
         if(flag){
-            val intent= Intent(activity!!, MainActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(activity, text, Toast.LENGTH_LONG).show()
+            var sref = databaseRef!!.child("Receipts").child(text!!)
+            sref.addValueEventListener(scanListener!!)
             flag=false
         }
 
