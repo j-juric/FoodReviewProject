@@ -128,7 +128,10 @@ class DatabseTestingActivity : AppCompatActivity() {
 
 
 
+        var r = ReservationMap()
 
+
+        r.map=HashMap<String,ArrayList<Table>>()
         for(i in 1..14){
             var date:String = "202001"+ (10+i).toString()
             Log.d(tag,"AAA")
@@ -147,10 +150,12 @@ class DatabseTestingActivity : AppCompatActivity() {
                 var table:Table= Table(Random.nextInt(1,4)*2,j,maps[j])
                 tableList.add(table)
             }
+            r.map!!.put(date,tableList!!)
             Log.d(tag,"DDD")
-            databaseRef!!.child("Reservations").child(date).setValue(tableList)
+            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
 
         }
+        databaseRef!!.child("Reservations").setValue(r.map!!)
 
 
 
@@ -201,24 +206,24 @@ class DatabseTestingActivity : AppCompatActivity() {
         databaseRef!!.child("Dishes").child(d12.name).setValue(d12)
         databaseRef!!.child("Dishes").child(d13.name).setValue(d13)
         */
-        var dref:DatabaseReference=databaseRef!!.child("Dishes")
-
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                if(dataSnapshot.exists()){
-                    Log.d(tag, "loadPost:onComplete")
-                    getDishes(dataSnapshot)
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
-                // ...
-            }
-        }
-        dref.addValueEventListener(postListener)
+//        var dref:DatabaseReference=databaseRef!!.child("Dishes")
+//
+//        val postListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//                if(dataSnapshot.exists()){
+//                    Log.d(tag, "loadPost:onComplete")
+//                    getDishes(dataSnapshot)
+//                }
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
+//                // ...
+//            }
+//        }
+//        dref.addValueEventListener(postListener)
 
 
 
