@@ -1,5 +1,6 @@
 package com.food.review
 
+
 import com.google.firebase.database.Exclude
 
 enum class Type{
@@ -11,10 +12,10 @@ data class Dish(var name:String = "",
                 var numOfRev:Int = 0,
                 var sumGrade:Float = 0f,
                 var price:Float=0f,
-                val type:Type = Type.MAIN)
+                val type:Type = Type.MAIN,
+                var image:String="" )
 {
     constructor():this("")
-
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
