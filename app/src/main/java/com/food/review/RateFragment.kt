@@ -192,8 +192,7 @@ class RateFragment(var receipt: Receipt,val userId:String,val receiptId:String,v
 
             }
             */
-
-
+            
             table.addView(row)
             table.addView(comment)
 

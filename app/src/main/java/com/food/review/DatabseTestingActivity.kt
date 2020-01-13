@@ -1,5 +1,6 @@
 package com.food.review
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import android.graphics.Point
 import android.view.WindowManager
 
 import android.graphics.Bitmap
+import android.widget.Toast
 import kotlin.random.Random
 
 
@@ -95,6 +97,28 @@ class DatabseTestingActivity : AppCompatActivity() {
             Log.d(tag, "GRESKA")
         }
 
+        var email="admin@jmail.com"
+        var password="root1234"
+        mAuth!!.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    val user = mAuth!!.currentUser
+                    val uid=user!!.uid
+                    val c = Customer("admin")
+                    databaseRef!!.child("Users").child("Owner").child(uid).setValue(c)
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("TAGG", "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        this, "Registration failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    //updateUI(null)
+                }
+            }
+
         //val key = databaseRef!!.child("Receipts").push().key
 
 //        var timeList:ArrayList<String> = ArrayList<String>(6)
@@ -154,6 +178,20 @@ class DatabseTestingActivity : AppCompatActivity() {
 
 
         arrayOfDishes= ArrayList()
+        databaseRef!!.child("Dishes").child("Carbonara").child("image").setValue("carbonara.jpg")
+        databaseRef!!.child("Dishes").child("Bolognese").child("image").setValue("bolognese.jpg")
+        databaseRef!!.child("Dishes").child("Pesto").child("image").setValue("pesto.jpg")
+        databaseRef!!.child("Dishes").child("Quattro Fromaggi").child("image").setValue("quattro_fromaggi.jpg")
+        databaseRef!!.child("Dishes").child("Aglio e olio").child("image").setValue("aglio_e_olio.jpg")
+        databaseRef!!.child("Dishes").child("Napolitana").child("image").setValue("napolitana.j[g")
+        databaseRef!!.child("Dishes").child("Alfredo Tacchini").child("image").setValue("alfredo_tacchini.jpg")
+        databaseRef!!.child("Dishes").child("Amatriciana").child("image").setValue("amatriciana.jpg")
+        databaseRef!!.child("Dishes").child("Funghi").child("image").setValue("funghi.jpg")
+        databaseRef!!.child("Dishes").child("Arrabbiata").child("image").setValue("arrabbiata.jpg")
+        databaseRef!!.child("Dishes").child("Nutella Pancakes").child("image").setValue("nutella_pancakes.jpg")
+        databaseRef!!.child("Dishes").child("Baklava").child("image").setValue("baklava.jpg")
+        databaseRef!!.child("Dishes").child("Apple Pie").child("image").setValue("apple_pie.jpg")
+
         /*
         var d1 = Dish("Carbonara","Italijanska pasta ciji su glavni sastojci neutralna pavlaka, jaja i slanina",0F,0,0F,30,Type.MAIN)
         var d2 = Dish("Bolognese","It consists of spaghetti served with a sauce made from tomatoes, minced beef, garlic, wine and herbs;",0F,0,0F,30,Type.MAIN)
