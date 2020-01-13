@@ -104,7 +104,7 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
                 setTitle("Reviews")
             }
             R.id.nav_scan -> {
-                selectedFragment= ScanFragment(user.id)
+                selectedFragment= ScanFragment(user.id,arrayOfDishes!!)
                 setTitle("Scan")
             }
             R.id.nav_reservations -> {

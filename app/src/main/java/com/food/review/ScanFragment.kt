@@ -24,7 +24,7 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.database.*
 
 
-class ScanFragment(val id:String): Fragment() , QRCodeReaderView.OnQRCodeReadListener {
+class ScanFragment(val id:String,val arrayOfDishes: ArrayList<Dish>): Fragment() , QRCodeReaderView.OnQRCodeReadListener {
 
 
 
@@ -70,19 +70,16 @@ class ScanFragment(val id:String): Fragment() , QRCodeReaderView.OnQRCodeReadLis
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 if(dataSnapshot.exists()){
-
                     var receipt = dataSnapshot.getValue(Receipt::class.java)
                     if (receipt!!.scanned){
                         Toast.makeText(activity, "It appears the code has already been scanned", Toast.LENGTH_LONG).show()
                     }
-                    val fragment = RateFragment(receipt,id,dataSnapshot.key!!)
+                    val fragment = RateFragment(receipt,id,dataSnapshot.key!!, arrayOfDishes)
                     val fragmentManager = activity!!.supportFragmentManager
                     val fragmentTransaction = fragmentManager.beginTransaction()
                     fragmentTransaction.replace(R.id.fragment_container, fragment)
                     fragmentTransaction.addToBackStack(null)
                     fragmentTransaction.commit()
-
-
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {

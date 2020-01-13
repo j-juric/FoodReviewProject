@@ -189,6 +189,7 @@ class RegisterFragment : Fragment() {
         if(flag1 && flag2){
             if (!password.equals(repassword)){
                 this.et_password_reg.error="Password must match in both cases."
+                valid=false
             }
 
         }
@@ -198,9 +199,9 @@ class RegisterFragment : Fragment() {
 
     private fun createAccount(firstName:String,lastName:String,email:String,password:String,repassword:String) {
         Log.d("TAGG", "createAccount:$email")
-        if (!validateForm(firstName,lastName,email,password,repassword)) {
-            return
-        }
+//        if (validateForm(firstName,lastName,email,password,repassword)) {
+//            return
+//        }
 
         //showProgressBar()
 
