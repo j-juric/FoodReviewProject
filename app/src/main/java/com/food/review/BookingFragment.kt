@@ -123,11 +123,6 @@ class BookingFragment(val user:Customer) : Fragment() {
                             } else i++
                         }
 
-
-
-
-
-
                         var pesak = reservations!![i].second.toString()
 
                         var pesakLista = arrayListOf<String>()
@@ -312,6 +307,7 @@ class BookingFragment(val user:Customer) : Fragment() {
 
 
                     val btn_Date=inflate.findViewById<TextView>(R.id.btn_booking_date)
+
                     btn_Date.setOnClickListener {
                         val now = Calendar.getInstance()
                         val datePicker = DatePickerDialog(
@@ -373,11 +369,12 @@ class BookingFragment(val user:Customer) : Fragment() {
                             position: Int,
                             id: Long
                         ) {
-                            Toast.makeText(context!!, "position : " + position, Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(context!!, "position : " + position, Toast.LENGTH_SHORT).show()
                             Log.d("booking",arrayOptions[position].toString())
                             velicina=arrayOptions[position]
                             Log.d("brojLjudi",arrayOptions[position].toString())
-                            result.text=arrayOptions[position].toString()
+                            //result.text=arrayOptions[position].toString()
+                            result.text="Time of the day:"
 
 
 
@@ -410,10 +407,10 @@ class BookingFragment(val user:Customer) : Fragment() {
                             Toast.makeText(context!!, "position : " + position, Toast.LENGTH_SHORT).show()
                             Log.d("booking",arrayOptionss[position].toString())
 
-                            //pravoVreme=arrayOptionss[position].toString()
-                            pravoVreme="13:00"
+                            pravoVreme=arrayOptionss[position].toString()
+                            //pravoVreme="13:00"
                             Log.d("vreme",pravoVreme)
-                            result.text=arrayOptionss[position].toString()
+                            result.text="Time of the day:"
 
                         }
                     }
@@ -466,7 +463,9 @@ class BookingFragment(val user:Customer) : Fragment() {
                         dialog.setPositiveButton("Back",null)
                         //  dialog.setCancelable(false)
                         dialog.show()}
+                      //val intent= Intent(activity, OwnerBookingFragment::class.java)
 
+                       // startActivity(intent)
 
                     }
                 } //iznad ovog
