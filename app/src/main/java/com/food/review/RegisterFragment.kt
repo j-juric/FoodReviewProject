@@ -189,6 +189,7 @@ class RegisterFragment : Fragment() {
         if(flag1 && flag2){
             if (!password.equals(repassword)){
                 this.et_password_reg.error="Password must match in both cases."
+                valid=false
             }
 
         }
@@ -198,12 +199,12 @@ class RegisterFragment : Fragment() {
 
     private fun createAccount(firstName:String,lastName:String,email:String,password:String,repassword:String) {
         Log.d("TAGG", "createAccount:$email")
-//        if (!validateForm(firstName,lastName,email,password,repassword)) {
+//        if (validateForm(firstName,lastName,email,password,repassword)) {
 //            return
 //        }
 
         //showProgressBar()
-        val user:FirebaseUser?=null
+
         // [START create_user_with_email]
         mAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(activity as Activity) { task ->

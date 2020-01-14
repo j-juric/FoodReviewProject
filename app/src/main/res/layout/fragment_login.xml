@@ -27,7 +27,8 @@
         android:fontFamily="@font/coming_soon"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="50dp"
-        android:layout_above="@id/et_email"/>
+        android:layout_above="@id/et_email"
+        />
 
     <EditText
         android:id="@+id/et_email"

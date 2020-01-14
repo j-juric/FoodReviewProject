@@ -1,6 +1,7 @@
 package com.food.review
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +14,11 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener ,
+    RateFragment.OnFragmentInteractionListener {
+    override fun onFragmentInteraction(uri: Uri) {
+
+    }
 
     /////[DATABASE_VARIABLES_START]
     var database: FirebaseDatabase?=null
@@ -67,7 +72,6 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
                     ).commit()
                 }
 
-
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -99,11 +103,11 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
                 setTitle("Reviews")
             }
             R.id.nav_scan -> {
-                selectedFragment= ScanFragment()
+                selectedFragment= ScanFragment(user.id,arrayOfDishes!!)
                 setTitle("Scan")
             }
             R.id.nav_reservations -> {
-                selectedFragment= BookingFragment()
+                selectedFragment= BookingFragment(user)
                 setTitle("Reservations")
             }
             R.id.nav_user -> {

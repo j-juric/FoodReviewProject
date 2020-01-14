@@ -5,14 +5,12 @@ import android.os.Build
 import java.sql.Date
 import java.time.LocalDate
 import java.util.*
+import kotlin.collections.HashMap
 
 @TargetApi(Build.VERSION_CODES.O)
-class Table(numOfPeople:Int, id:String)
+data class Table(var tableSize:Int=2
+                 , var id:Int=0
+                 ,var dailyReservations:HashMap<String,String>?=null)
 {
-    var date:Date=Date(0,0,0)
-    // dva niza sa brojevima ili jbmliga
-
-    val numOfPeople:Int=numOfPeople
-    val id:String=id
-
+    constructor():this(2)
 }

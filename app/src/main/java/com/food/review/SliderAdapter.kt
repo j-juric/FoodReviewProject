@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.slider_image_item.view.*
 
 class SliderAdapter(private val context: Context) : PagerAdapter() {
     private var inflater: LayoutInflater? = null
+    private val headings= arrayOf("OFFER OF THE DAY","SPECIALTY OF THE HOUSE","CUSTOMERS CHOISE")
     private val images = arrayOf(R.drawable.slider1, R.drawable.slider2, R.drawable.slider3)
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -30,6 +31,7 @@ class SliderAdapter(private val context: Context) : PagerAdapter() {
         inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater!!.inflate(R.layout.slider_image_item, null)
         view.slider_image.setImageResource(images[position])
+        view.headingLabel.text=headings[position]
 
         val vp = container as ViewPager
         vp.addView(view, 0)
@@ -42,27 +44,5 @@ class SliderAdapter(private val context: Context) : PagerAdapter() {
         val view = `object` as View
         vp.removeView(view)
     }
-    /*var images:Array<Int>
-    lateinit var inflater:LayoutInflater
-    constructor(context: Context, images:Array<Int>):super(){
-        this.context=context
-        this.images=images
-    }
-    override fun isViewFromObject(view: View, `object`: Any): Boolean = view== `object` as RelativeLayout
 
-    override fun getCount(): Int = images.size
-
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        var image:ImageView
-        inflater=context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var view:View=inflater.inflate(R.layout.slider_image_item,container,false)
-        image=view.findViewById(R.id.slider_image)
-        image.setBackgroundResource(images[position])
-        container!!.addView(view)
-        return view
-    }
-
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container!!.removeView(`object` as RelativeLayout)
-    }*/
 }

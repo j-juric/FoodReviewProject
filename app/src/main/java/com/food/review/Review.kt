@@ -2,18 +2,9 @@ package com.food.review
 
 import java.util.*
 
-class Review(user:User, grade:Float, date: Date, text:String)
+data class Review(var rating:Float=0f
+                  , var date: String=""
+                  , var comment:String="")
 {
-    val user:User=user
-    get()=field
-
-    val grade:Float=grade
-    get()=field
-
-    val date:Date=date
-    get()=field
-
-    val text:String=text
-    get()=field
-
+    constructor():this(0f)
 }

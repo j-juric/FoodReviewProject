@@ -86,10 +86,10 @@ class LoginFragment : Fragment() {
                     Log.d("TAGG",customer.toString())
                     val intent= Intent(activity, MainMenu::class.java)
                     intent.putExtra("Uid",customer!!.id)
-                    intent.putExtra("firstName",customer!!.firstName)
-                    intent.putExtra("lastName",customer!!.lastName)
-                    intent.putExtra("email",customer!!.email)
-                    intent.putExtra("credits",customer!!.credits)
+                    intent.putExtra("firstName",customer.firstName)
+                    intent.putExtra("lastName",customer.lastName)
+                    intent.putExtra("email",customer.email)
+                    intent.putExtra("credits",customer.credits)
                     startActivity(intent)
                 }
             }
@@ -104,11 +104,10 @@ class LoginFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 if(dataSnapshot.exists()){
-                    var customer = dataSnapshot.getValue(Customer::class.java)
-                    Log.d("TAGG",customer.toString())
-                    val intent= Intent(activity, MainMenu::class.java)
-                    intent.putExtra("Uid",uid)
-                    intent.putExtra("Role","Owner")
+
+                    Toast.makeText(activity, "ADMIN LOG IN.",
+                        Toast.LENGTH_LONG).show()
+                    val intent= Intent(activity, OwnerActivity::class.java)
                     startActivity(intent)
 
                 }
@@ -144,8 +143,8 @@ class LoginFragment : Fragment() {
 
         //[BUTTON_LISTENERS_START]
         btn_login.setOnClickListener{
-            Log.d("TAGG",email!!.text.toString() + " "+password!!.text.toString())
-            signIn(email!!.text.toString(),password!!.text.toString())
+            Log.d("TAGG",email.text.toString() + " "+password.text.toString())
+            signIn(email.text.toString(),password.text.toString())
         }
         btn_go_to_register.setOnClickListener {
             val fragment = RegisterFragment()
