@@ -4,17 +4,16 @@ import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.images.view.*
 
 //arrayOfDishes je lista koja je dobijena iz baze
 class ReviewFragment(val applicationContext: Context,val arrayOfDishes: ArrayList<Dish>) : Fragment() {
@@ -62,14 +61,31 @@ class ReviewFragment(val applicationContext: Context,val arrayOfDishes: ArrayLis
             txtGrade.gravity= Gravity.RIGHT
             row.addView(txtGrade)
 
+            var dishImage: ImageView? =d.myImage
+            var imageName=d.image
+            Log.d("TAG", imageName)
+
+            val id = resources.getIdentifier("com.food.review:drawable/$imageName", null, null)
+            Log.d("TAG", id.toString())
+
+
+
             row.setOnClickListener{
                 val builder = AlertDialog.Builder(applicationContext)
-                //set title for alert dialog
+                var dialogView=layoutInflater.inflate(R.layout.images,null)
+                var showImage=dialogView.findViewById<ImageView>(R.id.dishImage)
+
+
+
+                  //set title for alert dialog
                 builder.setTitle(d.name)
                 //set message for alert dialog
+
                 builder.setMessage(d.description)
                 builder.setIcon(android.R.drawable.ic_dialog_info)
 
+                Log.d("TAG",d.myImage.toString())
+                builder.setView(dialogView)
 
                 builder.setPositiveButton("Close"){dialogInterface, which ->
                     Toast.makeText(applicationContext,"closed",Toast.LENGTH_LONG).show()

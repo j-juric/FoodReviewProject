@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
 import androidx.annotation.IdRes
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.annotation.NonNull
@@ -13,6 +15,11 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener ,
     RateFragment.OnFragmentInteractionListener {
@@ -28,6 +35,7 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
 
     /////[FETCHED_DATA_START]
     var arrayOfDishes: ArrayList<Dish> ?= null
+    val map = HashMap<String,Int>()
     var user:Customer=Customer()
     /////[FETCHED_DATA_END]
 
@@ -65,6 +73,7 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
                 if(dataSnapshot.exists()){
                     Log.d(tag, "loadPost:onComplete")
                     getDishes(dataSnapshot)
+                    connectImages(arrayOfDishes!!)
                     nav_view=findViewById(R.id.bottom_navigation) as BottomNavigationView
                     nav_view!!.setOnNavigationItemSelectedListener(context)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
@@ -132,6 +141,99 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
             Log.d(tag,i.toString())
         }
     }
+    fun connectImages(arr:ArrayList<Dish>){
+        //var ima:ImageView?=findViewById(R.id.dishImage)
+        var string="aglio_e_olio.jpg"
+        val id0 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        Log.d("TAG",id0.toString())
+        Log.d("TAG",arr[0].name)
+        arr[0].myImage= ImageView(this)
+        arr[0].myImage!!.setImageResource(id0)
+        Log.d("TAG",arr[0].myImage.toString())
 
+        string="alfredo_tacchini.jpg"
+        val id1 = resources.getIdentifier("com.food.review:drawable/$string", "drawable", packageName)
+        Log.d("TAG",id1.toString())
+        Log.d("TAG",arr[1].name)
+        arr[1].myImage= ImageView(this)
+        arr[1].myImage!!.setImageResource(id1)
+        Log.d("TAG",arr[1].myImage.toString())
+
+        string="amatricana.jpg"
+        val id2 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[2].myImage= ImageView(this)
+        arr[2].myImage!!.setImageResource(id2)
+
+        string="apple_pie.jpg"
+        val id3 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[3].myImage= ImageView(this)
+        arr[3].myImage!!.setImageResource(id3)
+
+        string="arrabiata.jpg"
+        val id4 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[4].myImage= ImageView(this)
+        arr[4].myImage!!.setImageResource(id4)
+
+        string="baklava.jpg"
+        val id5 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[5].myImage= ImageView(this)
+        arr[5].myImage!!.setImageResource(id5)
+
+        string="bolognese.jpg"
+        val id6 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[6].myImage= ImageView(this)
+        arr[6].myImage!!.setImageResource(id6)
+
+        string="carbonara.jpg"
+        val id7 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[7].myImage= ImageView(this)
+        arr[7].myImage!!.setImageResource(id7)
+
+        string="funghi.jpg"
+        val id8 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[8].myImage= ImageView(this)
+        arr[8].myImage!!.setImageResource(id8)
+
+        string="napolitana.jpg"
+        val id9 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[9].myImage= ImageView(this)
+        arr[9].myImage!!.setImageResource(id9)
+
+        string="nutella_pancakes.jpg"
+        val id10 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[10].myImage= ImageView(this)
+        arr[10].myImage!!.setImageResource(id10)
+
+        string="pesto.jpg"
+        val id11 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[11].myImage= ImageView(this)
+        arr[11].myImage!!.setImageResource(id11)
+
+        string="quattro_formaggi.jpg"
+        val id12 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
+        arr[12].myImage= ImageView(this)
+        arr[12].myImage!!.setImageResource(id12)
+
+        /*map.set("carbonara.jpg",applicationContext.getDrawable().)
+        map.set("agilo_e_olio.jpg",R.drawable.agilo_e_olio)
+        map.set("carbonara.jpg",R.drawable.carbonara)
+        map.set("alfredo_tacchini.jpg",R.drawable.alfredo_tacchini)
+        map.set("amatriciana.jpg",R.drawable.amatriciana)
+        map.set("napolitana.jpg",R.drawable.napolitana)
+        map.set("apple_pie.jpg",R.drawable.apple_pie)
+        map.set("arrabbiata.jpg",R.drawable.arrabbiata)
+        map.set("baklava.jpg",R.drawable.baklava)
+        map.set("bolognese.jpg",R.drawable.bolognese)
+        map.set("funghi.jpg",R.drawable.funghi)
+        map.set("pesto.jpg",R.drawable.pesto)
+        map.set("nutella_pancakes.jpg",R.drawable.nutella_pancakes)
+        map.set("quattro_fromaggi.jpg",R.drawable.quattro_fromaggi)
+
+
+        for(i:Dish in arr){
+            val num=map[i.name]
+            i.myImage=R.id.num*/
+
+    }
 
 }

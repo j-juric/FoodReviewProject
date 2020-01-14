@@ -1,6 +1,7 @@
 package com.food.review
 
 
+import android.widget.ImageView
 import com.google.firebase.database.Exclude
 
 enum class Type{
@@ -15,6 +16,7 @@ data class Dish(var name:String = "",
                 val type:Type = Type.MAIN,
                 var image:String="" )
 {
+    var myImage:ImageView?=null
     constructor():this("")
     @Exclude
     fun toMap(): Map<String, Any?> {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/aglio_e_olio"/>
+    <item android:drawable="@drawable/alfredo_tacchini"/>
+    <item android:drawable="@drawable/amatriciana"/>
+    <item android:drawable="@drawable/apple_pie"/>
+    <item android:drawable="@drawable/arrabbiata"/>
+    <item android:drawable="@drawable/baklava"/>
+    <item android:drawable="@drawable/bolognese"/>
+    <item android:drawable="@drawable/carbonara"/>
+    <item android:drawable="@drawable/funghi"/>
+    <item android:drawable="@drawable/napolitana"/>
+    <item android:drawable="@drawable/nutella_pancakes"/>
+    <item android:drawable="@drawable/pesto"/>
+    <item android:drawable="@drawable/quattro_fromaggi"/>
+</selector>

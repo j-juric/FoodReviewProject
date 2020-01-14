@@ -19,6 +19,11 @@ import android.view.WindowManager
 
 import android.graphics.Bitmap
 import kotlin.random.Random
+import android.graphics.drawable.Drawable
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.media.Image
 
 
 class DatabseTestingActivity : AppCompatActivity() {
@@ -27,6 +32,8 @@ class DatabseTestingActivity : AppCompatActivity() {
     var databaseRef:DatabaseReference?=null
     var mAuth: FirebaseAuth?=null
     var arrayOfDishes: ArrayList<Dish> ?= null
+    val map = HashMap<String,ImageView>()
+
 
     var qrImage:ImageView ?=null
     var bitmap: Bitmap? = null
@@ -191,6 +198,7 @@ class DatabseTestingActivity : AppCompatActivity() {
                 if(dataSnapshot.exists()){
                     Log.d(tag, "loadPost:onComplete")
                     getDishes(dataSnapshot)
+
                 }
             }
 
@@ -246,5 +254,23 @@ class DatabseTestingActivity : AppCompatActivity() {
 
     }
 
+   /* fun connectImages(arr:ArrayList<Dish>){
+        map.set("carbonara.jpg",R.drawable.carbonara as ImageView)
+        map.set("agilo_e_olio.jpg",R.drawable.agilo_e_olio as ImageView)
+        map.set("alfredo_tacchini.jpg",R.drawable.alfredo_tacchini as ImageView)
+        map.set("amatriciana.jpg",R.drawable.amatriciana as ImageView)
+        map.set("napolitana.jpg",R.drawable.napolitana as ImageView)
+        map.set("apple_pie.jpg",R.drawable.apple_pie as ImageView)
+        map.set("arrabbiata.jpg",R.drawable.arrabbiata as ImageView)
+        map.set("baklava.jpg",R.drawable.baklava as ImageView)
+        map.set("bolognese.jpg",R.drawable.bolognese as ImageView)
+        map.set("funghi.jpg",R.drawable.funghi as ImageView)
+        map.set("pesto.jpg",R.drawable.pesto as ImageView)
+        map.set("nutella_pancakes.jpg",R.drawable.nutella_pancakes as ImageView)
+        map.set("quattro_fromaggi.jpg",R.drawable.quattro_fromaggi as ImageView)
 
+        for(i:Dish in arr){
+             i.myImage=map[i.image]
+        }
+    }*/
 }
