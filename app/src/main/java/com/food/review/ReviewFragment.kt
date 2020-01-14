@@ -80,8 +80,6 @@ fun draw(){
      txtName.gravity= Gravity.CENTER
      row.addView(txtName)
 
-
-
      val r = RatingBar(activity)
      r.isClickable=false
      r.numStars=5
