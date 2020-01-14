@@ -101,61 +101,62 @@ class DatabseTestingActivity : AppCompatActivity() {
 
         //val key = databaseRef!!.child("Receipts").push().key
 
-        var timeList:ArrayList<String> = ArrayList<String>(6)
+//        var timeList:ArrayList<String> = ArrayList<String>(6)
+//
+//        timeList.add("12:00")
+//        timeList.add("14:00")
+//        timeList.add("16:00")
+//        timeList.add("18:00")
+//        timeList.add("20:00")
+//        timeList.add("22:00")
+//
+//        var nameList:ArrayList<String> = ArrayList<String>(12)
+//        nameList.add("Kolumbo")
+//        nameList.add("Dubravka")
+//        nameList.add("Trifun")
+//        nameList.add("Svetozar")
+//        nameList.add("Jefimije")
+//        nameList.add("Pero")
+//        nameList.add("Milo")
+//        nameList.add("Ratislav")
+//        nameList.add("Ratimir")
+//        nameList.add("Svemirko")
+//        nameList.add("Josif")
+//        nameList.add("Ratko")
+//
+//
+//
+//
+//
+//        var r = ReservationMap()
+//
+//
+//        r.map=HashMap<String,ArrayList<Table>>()
+//        for(i in 1..14){
+//            var date:String = "202001"+ (10+i).toString()
+//            Log.d(tag,"AAA")
+//            var tableList:ArrayList<Table> = ArrayList<Table>(20)
+//            Log.d(tag,"BBB")
+//            var maps:ArrayList<HashMap<String,String>> = ArrayList<HashMap<String,String>>()
+//            for (kk in 1..20){
+//                var map  = HashMap<String,String>()
+//                for(k in 0..5){
+//                    map.put(timeList[k],nameList[Random.nextInt(0,11)])
+//                }
+//                maps.add(map)
+//            }
+//            Log.d(tag,"CCC")
+//            for(j in 0..19){
+//                var table:Table= Table(Random.nextInt(1,4)*2,j,maps[j])
+//                tableList.add(table)
+//            }
+//            r.map!!.put(date,tableList!!)
+//            Log.d(tag,"DDD")
+//            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
+//
+//        }
+//        databaseRef!!.child("Reservations").setValue(r.map!!)
 
-        timeList.add("12:00")
-        timeList.add("14:00")
-        timeList.add("16:00")
-        timeList.add("18:00")
-        timeList.add("20:00")
-        timeList.add("22:00")
-
-        var nameList:ArrayList<String> = ArrayList<String>(12)
-        nameList.add("Kolumbo")
-        nameList.add("Dubravka")
-        nameList.add("Trifun")
-        nameList.add("Svetozar")
-        nameList.add("Jefimije")
-        nameList.add("Pero")
-        nameList.add("Milo")
-        nameList.add("Ratislav")
-        nameList.add("Ratimir")
-        nameList.add("Svemirko")
-        nameList.add("Josif")
-        nameList.add("Ratko")
-
-
-
-
-
-        var r = ReservationMap()
-
-
-        r.map=HashMap<String,ArrayList<Table>>()
-        for(i in 1..14){
-            var date:String = "202001"+ (10+i).toString()
-            Log.d(tag,"AAA")
-            var tableList:ArrayList<Table> = ArrayList<Table>(20)
-            Log.d(tag,"BBB")
-            var maps:ArrayList<HashMap<String,String>> = ArrayList<HashMap<String,String>>()
-            for (kk in 1..20){
-                var map  = HashMap<String,String>()
-                for(k in 0..5){
-                    map.put(timeList[k],nameList[Random.nextInt(0,11)])
-                }
-                maps.add(map)
-            }
-            Log.d(tag,"CCC")
-            for(j in 0..19){
-                var table:Table= Table(Random.nextInt(1,4)*2,j,maps[j])
-                tableList.add(table)
-            }
-            r.map!!.put(date,tableList!!)
-            Log.d(tag,"DDD")
-            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
-
-        }
-        databaseRef!!.child("Reservations").setValue(r.map!!)
 
 
 
@@ -206,24 +207,24 @@ class DatabseTestingActivity : AppCompatActivity() {
         databaseRef!!.child("Dishes").child(d12.name).setValue(d12)
         databaseRef!!.child("Dishes").child(d13.name).setValue(d13)
         */
-//        var dref:DatabaseReference=databaseRef!!.child("Dishes")
-//
-//        val postListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                // Get Post object and use the values to update the UI
-//                if(dataSnapshot.exists()){
-//                    Log.d(tag, "loadPost:onComplete")
-//                    getDishes(dataSnapshot)
-//                }
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
-//                // ...
-//            }
-//        }
-//        dref.addValueEventListener(postListener)
+        var dref:DatabaseReference=databaseRef!!.child("Dishes")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if(dataSnapshot.exists()){
+                    Log.d(tag, "loadPost:onComplete")
+                    getDishes(dataSnapshot)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+        dref.addValueEventListener(postListener)
 
 
 
@@ -231,11 +232,29 @@ class DatabseTestingActivity : AppCompatActivity() {
     }
 
     fun getDishes(dataSnapshot:DataSnapshot){
+        arrayOfDishes=ArrayList<Dish>()
         for(i in dataSnapshot.children){
             var dish = i.getValue(Dish::class.java)
             arrayOfDishes!!.add(dish!!)
         }
-        generateReceipts(arrayOfDishes!!)
+        for(i in 1..200){
+            var date:String = "2019"+Random.nextInt(10,12).toString()+ (10+i%18).toString()
+            var numD= arrayOfDishes!!.size
+
+            var maps:ArrayList<HashMap<String,String>> = ArrayList<HashMap<String,String>>()
+
+            for(j in 1..5){
+                var k = databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).push().key
+                var r = Review(Random.nextInt(1,5).toFloat() ,date,"")
+                databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).child(k!!).child("rating").setValue(r)
+            }
+
+
+
+            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
+
+        }
+        //generateReceipts(arrayOfDishes!!)
 
     }
 

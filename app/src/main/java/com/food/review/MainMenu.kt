@@ -45,19 +45,14 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
         user.email=intent.getStringExtra("email")
         user.credits=intent.getIntExtra("credits",0)
 
-        Log.d(tag,"SETTING DATABASE PARAMETERS")
         database= FirebaseDatabase.getInstance()
-        Log.d(tag,"INSTANCE HAS BEEN DECLARED")
         databaseRef=FirebaseDatabase.getInstance().reference
-        Log.d(tag,"DATABASE PARAMETERS HAVE BEEN SET")
 
-        Log.d(tag,"SETTING DISH DATABASE REFERENCE")
+
         var dref: DatabaseReference =databaseRef!!.child("Dishes")
-        Log.d(tag,"DISH DATABASE REFERENCE HAS BEEN SET")
 
-        Log.d(tag,"SETTING CONTEXT")
         val context=this
-        Log.d(tag,"CONTEXT HAS BEEN SET")
+
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
