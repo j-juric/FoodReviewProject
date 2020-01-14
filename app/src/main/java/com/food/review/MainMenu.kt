@@ -81,7 +81,6 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
                     ).commit()
                 }
 
-
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

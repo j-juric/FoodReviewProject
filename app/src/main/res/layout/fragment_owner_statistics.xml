@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OwnerStatisticsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_above="@id/button_layout"/>
+    <RelativeLayout
+
+        android:id="@+id/button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="1">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_buttons"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <RadioButton
+                android:id="@+id/radio_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="100dp"
+                android:text="week">
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/radio_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="100dp"
+                android:text="month"
+                >
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/radio_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="100dp"
+                android:text="year">
+            </RadioButton>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_top5_rating"
+            android:text="TOP 5 BY RATING"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="165dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_custom"
+            android:layout_below="@id/radio_buttons"
+            />
+        <Button
+            android:id="@+id/btn_top5_count"
+            android:text="TOP 5 BY COUNT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="165dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toRightOf="@+id/btn_top5_rating"
+            android:layout_below="@+id/radio_buttons"
+            android:background="@drawable/btn_custom"
+            />
+        <Button
+            android:id="@+id/btn_bottom5_rating"
+            android:text="BOTTOM 5 BY RATING"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="165dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_below="@+id/btn_top5_rating"
+            android:background="@drawable/btn_custom"/>
+        <Button
+            android:id="@+id/btn_bottom5_count"
+            android:text="BOTTOM 5 BY COUNT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="165dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toRightOf="@+id/btn_bottom5_rating"
+            android:layout_below="@+id/btn_top5_count"
+            android:background="@drawable/btn_custom"/>
+
+
+    </RelativeLayout>
+
+</FrameLayout>

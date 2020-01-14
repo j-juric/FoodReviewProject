@@ -74,8 +74,8 @@ class LoginFragment : Fragment() {
         var password = v.et_password
 
 
-        email!!.setText("jj@jmail.com")
-        password!!.setText("test1234")
+        email!!.setText("admin@jmail.com")
+        password!!.setText("root1234")
 
 
         customerListener = object : ValueEventListener {
@@ -104,11 +104,10 @@ class LoginFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 if(dataSnapshot.exists()){
-                    var customer = dataSnapshot.getValue(Customer::class.java)
-                    Log.d("TAGG",customer.toString())
-                    val intent= Intent(activity, MainMenu::class.java)
-                    intent.putExtra("Uid",uid)
-                    intent.putExtra("Role","Owner")
+
+                    Toast.makeText(activity, "ADMIN LOG IN.",
+                        Toast.LENGTH_LONG).show()
+                    val intent= Intent(activity, OwnerActivity::class.java)
                     startActivity(intent)
 
                 }

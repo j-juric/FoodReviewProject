@@ -1,5 +1,6 @@
 package com.food.review
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,12 +19,8 @@ import android.graphics.Point
 import android.view.WindowManager
 
 import android.graphics.Bitmap
+import android.widget.Toast
 import kotlin.random.Random
-import android.graphics.drawable.Drawable
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.media.Image
 
 
 class DatabseTestingActivity : AppCompatActivity() {
@@ -32,8 +29,6 @@ class DatabseTestingActivity : AppCompatActivity() {
     var databaseRef:DatabaseReference?=null
     var mAuth: FirebaseAuth?=null
     var arrayOfDishes: ArrayList<Dish> ?= null
-    val map = HashMap<String,ImageView>()
-
 
     var qrImage:ImageView ?=null
     var bitmap: Bitmap? = null
@@ -102,36 +97,41 @@ class DatabseTestingActivity : AppCompatActivity() {
             Log.d(tag, "GRESKA")
         }
 
+
+
         //val key = databaseRef!!.child("Receipts").push().key
 
-//        var timeList:ArrayList<String> = ArrayList<String>(6)
-//
-//        timeList.add("12:00")
-//        timeList.add("14:00")
-//        timeList.add("16:00")
-//        timeList.add("18:00")
-//        timeList.add("20:00")
-//        timeList.add("22:00")
-//
-//        var nameList:ArrayList<String> = ArrayList<String>(12)
-//        nameList.add("Kolumbo")
-//        nameList.add("Dubravka")
-//        nameList.add("Trifun")
-//        nameList.add("Svetozar")
-//        nameList.add("Jefimije")
-//        nameList.add("Pero")
-//        nameList.add("Milo")
-//        nameList.add("Ratislav")
-//        nameList.add("Ratimir")
-//        nameList.add("Svemirko")
-//        nameList.add("Josif")
-//        nameList.add("Ratko")
+        var timeList:ArrayList<String> = ArrayList<String>(6)
+
+        timeList.add("12:00")
+        timeList.add("14:00")
+        timeList.add("16:00")
+        timeList.add("18:00")
+        timeList.add("20:00")
+        timeList.add("22:00")
+
+        var nameList:ArrayList<String> = ArrayList<String>(12)
+        nameList.add("Kolumbo")
+        nameList.add("Dubravka")
+        nameList.add("Trifun")
+        nameList.add("Svetozar")
+        nameList.add("Jefimije")
+        nameList.add("Pero")
+        nameList.add("Milo")
+        nameList.add("Ratislav")
+        nameList.add("Ratimir")
+        nameList.add("Svemirko")
+        nameList.add("Josif")
+        nameList.add("Ratko")
 
 
 
 
 
-        /*
+        var r = ReservationMap()
+
+
+        r.map=HashMap<String,ArrayList<Table>>()
         for(i in 1..14){
             var date:String = "202001"+ (10+i).toString()
             Log.d(tag,"AAA")
@@ -150,17 +150,33 @@ class DatabseTestingActivity : AppCompatActivity() {
                 var table:Table= Table(Random.nextInt(1,4)*2,j,maps[j])
                 tableList.add(table)
             }
+            r.map!!.put(date,tableList!!)
             Log.d(tag,"DDD")
-            databaseRef!!.child("Reservations").child(date).setValue(tableList)
+            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
 
-        }*/
-
-
-
+        }
+        databaseRef!!.child("Reservations").setValue(r.map!!)
 
 
 
-        arrayOfDishes= ArrayList()
+
+
+
+//        arrayOfDishes= ArrayList()
+//        databaseRef!!.child("Dishes").child("Carbonara").child("image").setValue("carbonara.jpg")
+//        databaseRef!!.child("Dishes").child("Bolognese").child("image").setValue("bolognese.jpg")
+//        databaseRef!!.child("Dishes").child("Pesto").child("image").setValue("pesto.jpg")
+//        databaseRef!!.child("Dishes").child("Quattro Fromaggi").child("image").setValue("quattro_fromaggi.jpg")
+//        databaseRef!!.child("Dishes").child("Aglio e olio").child("image").setValue("aglio_e_olio.jpg")
+//        databaseRef!!.child("Dishes").child("Napolitana").child("image").setValue("napolitana.j[g")
+//        databaseRef!!.child("Dishes").child("Alfredo Tacchini").child("image").setValue("alfredo_tacchini.jpg")
+//        databaseRef!!.child("Dishes").child("Amatriciana").child("image").setValue("amatriciana.jpg")
+//        databaseRef!!.child("Dishes").child("Funghi").child("image").setValue("funghi.jpg")
+//        databaseRef!!.child("Dishes").child("Arrabbiata").child("image").setValue("arrabbiata.jpg")
+//        databaseRef!!.child("Dishes").child("Nutella Pancakes").child("image").setValue("nutella_pancakes.jpg")
+//        databaseRef!!.child("Dishes").child("Baklava").child("image").setValue("baklava.jpg")
+//        databaseRef!!.child("Dishes").child("Apple Pie").child("image").setValue("apple_pie.jpg")
+
         /*
         var d1 = Dish("Carbonara","Italijanska pasta ciji su glavni sastojci neutralna pavlaka, jaja i slanina",0F,0,0F,30,Type.MAIN)
         var d2 = Dish("Bolognese","It consists of spaghetti served with a sauce made from tomatoes, minced beef, garlic, wine and herbs;",0F,0,0F,30,Type.MAIN)
@@ -190,25 +206,24 @@ class DatabseTestingActivity : AppCompatActivity() {
         databaseRef!!.child("Dishes").child(d12.name).setValue(d12)
         databaseRef!!.child("Dishes").child(d13.name).setValue(d13)
         */
-        var dref:DatabaseReference=databaseRef!!.child("Dishes")
-
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                if(dataSnapshot.exists()){
-                    Log.d(tag, "loadPost:onComplete")
-                    getDishes(dataSnapshot)
-
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
-                // ...
-            }
-        }
-        dref.addValueEventListener(postListener)
+//        var dref:DatabaseReference=databaseRef!!.child("Dishes")
+//
+//        val postListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//                if(dataSnapshot.exists()){
+//                    Log.d(tag, "loadPost:onComplete")
+//                    getDishes(dataSnapshot)
+//                }
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
+//                // ...
+//            }
+//        }
+//        dref.addValueEventListener(postListener)
 
 
 
@@ -254,23 +269,5 @@ class DatabseTestingActivity : AppCompatActivity() {
 
     }
 
-   /* fun connectImages(arr:ArrayList<Dish>){
-        map.set("carbonara.jpg",R.drawable.carbonara as ImageView)
-        map.set("agilo_e_olio.jpg",R.drawable.agilo_e_olio as ImageView)
-        map.set("alfredo_tacchini.jpg",R.drawable.alfredo_tacchini as ImageView)
-        map.set("amatriciana.jpg",R.drawable.amatriciana as ImageView)
-        map.set("napolitana.jpg",R.drawable.napolitana as ImageView)
-        map.set("apple_pie.jpg",R.drawable.apple_pie as ImageView)
-        map.set("arrabbiata.jpg",R.drawable.arrabbiata as ImageView)
-        map.set("baklava.jpg",R.drawable.baklava as ImageView)
-        map.set("bolognese.jpg",R.drawable.bolognese as ImageView)
-        map.set("funghi.jpg",R.drawable.funghi as ImageView)
-        map.set("pesto.jpg",R.drawable.pesto as ImageView)
-        map.set("nutella_pancakes.jpg",R.drawable.nutella_pancakes as ImageView)
-        map.set("quattro_fromaggi.jpg",R.drawable.quattro_fromaggi as ImageView)
 
-        for(i:Dish in arr){
-             i.myImage=map[i.image]
-        }
-    }*/
 }

@@ -5,29 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/food"
     tools:context=".RegisterFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <TextView
         android:id="@+id/tv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/bowlby_one_sc"
         android:text="Register"
         android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="50sp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="@font/coming_soon"
-        android:layout_marginTop="60dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to our app"
-        android:textSize="17sp"
-        android:fontFamily="@font/coming_soon"
+        android:layout_above="@id/et_email"
         android:layout_marginStart="25dp"
-        android:layout_marginBottom="50dp"/>
+        android:layout_marginBottom="50dp"
+        android:alpha="1"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="Welcome to our app"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="27sp" />
 
     <EditText
         android:id="@+id/et_firstName"
@@ -107,7 +116,7 @@
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_custom"
+            android:background="@drawable/btn_rounded"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
@@ -120,7 +129,7 @@
             android:id="@+id/btn_go_to_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_custom"
+            android:background="@drawable/btn_rounded"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
@@ -129,18 +138,21 @@
             android:text="ALREADY REIGSTERED? LOG IN HERE"/>
 
 
-
         <TextView
             android:id="@+id/swipeLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="© M. Grbusic, A. Ristic, N. Stankovic, J. Juric, N. Jovic"
-            android:textSize="15sp"
-
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+
+            android:text="© M. Grbusic, A. Ristic, N. Stankovic, J. Juric, N. Jovic"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
 
     </RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>

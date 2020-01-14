@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_booking.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 
 class BookingFragment(val user:Customer) : Fragment() {
@@ -30,7 +31,7 @@ class BookingFragment(val user:Customer) : Fragment() {
 
     ///Reservations    Pair <String,ArrayList<Table> PAR (DATUM : LISTA STOLOVA) FORMAT DATUMA : yyyymmdd
     var reservations:ArrayList<Pair<String,ArrayList<Table>>>?=null
-
+    var map=HashMap<String,ArrayList<Table>>()
 
 
     lateinit var optionsSpinner:Spinner
@@ -38,7 +39,7 @@ class BookingFragment(val user:Customer) : Fragment() {
     var formate = SimpleDateFormat("dd MMM, YYYY",Locale.FRANCE)
     var timeFormat = SimpleDateFormat("hh:mm a", Locale.FRANCE)
 
-
+    var tagg="TAGG"
 
     @Nullable
     override fun onCreateView(@NonNull inflater:LayoutInflater, @Nullable container:ViewGroup?, @Nullable savedInstaceState:Bundle?):View?{
@@ -63,21 +64,37 @@ class BookingFragment(val user:Customer) : Fragment() {
 
 
         //QUERY WHICH RETURNS DATA FOR THE NEXT 14 DAYS
-        val last14days = databaseRef!!.child("Reservations").orderByKey()
-            .startAt("20200120")    //<---------- OVDE UNESI DANASNJI DATUM
+        val last14days = databaseRef!!.child("Reservations").endAt("20200115") //<---------- OVDE UNESI DANASNJI DATUM
         //QUERY LISTENER
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                Log.d(tag,"USAO U OVO CUDO")
-                reservations = ArrayList()
+                Log.d(tagg,"USAO U OVO CUDO")
+                Log.d(tagg,dataSnapshot.toString())
+
                 if (dataSnapshot.exists()) {
-                    Log.d(tag,dataSnapshot.toString())
                     for(i in dataSnapshot.children){
-                        var p = Pair(i.key!!,i.value as ArrayList<Table>)
-                        Log.d(tag,i.key.toString())
-                        reservations!!.add(p)
+                        var lst = ArrayList<Table>()
+                        for(j in i.children){
+                            var t = j.getValue(Table::class.java)
+                            lst.add(t!!)
+                        }
+                        map!!.set(i.key!!,lst)
                     }
+                    Log.d(tagg,dataSnapshot.toString())
+
+                    Log.d(tagg,"VELIKA MAPA")
+                    Log.d(tagg,map.toString())
+                    Log.d(tagg,"VELIKA MAPA KRAJ")
+
+                    //map=dataSnapshot.getValue(HashMap<String,ArrayList<Table>>::class.java)
+//                    for(i in dataSnapshot.children){
+//                        var dish = i.getValue(Dish::class.java)
+//                        map = dataSnapshot
+//                        var p = Pair(i.key!!,i.value as ArrayList<Table>)
+//                        Log.d(tag,i.key.toString())
+//                        reservations!!.add(p)
+//                    }
                     //OVDE MOZE DA SE DODA DRAW
                 }
 
