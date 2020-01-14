@@ -74,8 +74,8 @@ class LoginFragment : Fragment() {
         var password = v.et_password
 
 
-        email!!.setText("jj@jmail.com")
-        password!!.setText("test1234")
+        email!!.setText("admin@jmail.com")
+        password!!.setText("root1234")
 
 
         customerListener = object : ValueEventListener {
