@@ -99,7 +99,7 @@ class DatabseTestingActivity : AppCompatActivity() {
 
 
 
-        //val key = databaseRef!!.child("Receipts").push().key
+        val key = databaseRef!!.child("Receipts").push().key
 
         var timeList:ArrayList<String> = ArrayList<String>(6)
 
@@ -125,37 +125,35 @@ class DatabseTestingActivity : AppCompatActivity() {
         nameList.add("Ratko")
 
 
+//        var r = ReservationMap()
+//
+//
+//        r.map=HashMap<String,ArrayList<Table>>()
+//        for(i in 1..14){
+//            var date:String = "202001"+ (15+i).toString()
+//            Log.d(tag,"AAA")
+//            var tableList:ArrayList<Table> = ArrayList<Table>(20)
+//            Log.d(tag,"BBB")
+//            var maps:ArrayList<HashMap<String,String>> = ArrayList<HashMap<String,String>>()
+//            for (kk in 1..20){
+//                var map  = HashMap<String,String>()
+//                for(k in 0..3){
+//                    map.put(timeList[k],nameList[Random.nextInt(0,11)])
+//                }
+//                maps.add(map)
+//            }
+//            Log.d(tag,"CCC")
+//            for(j in 0..19){
+//                var table:Table= Table(Random.nextInt(1,4)*2,j,maps[j])
+//                tableList.add(table)
+//            }
+//            r.map!!.put(date,tableList!!)
+//            Log.d(tag,"DDD")
+//            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
+//
+//        }
+//        databaseRef!!.child("Reservations").setValue(r.map!!)
 
-
-
-        var r = ReservationMap()
-
-
-        r.map=HashMap<String,ArrayList<Table>>()
-        for(i in 1..14){
-            var date:String = "202001"+ (10+i).toString()
-            Log.d(tag,"AAA")
-            var tableList:ArrayList<Table> = ArrayList<Table>(20)
-            Log.d(tag,"BBB")
-            var maps:ArrayList<HashMap<String,String>> = ArrayList<HashMap<String,String>>()
-            for (kk in 1..20){
-                var map  = HashMap<String,String>()
-                for(k in 0..5){
-                    map.put(timeList[k],nameList[Random.nextInt(0,11)])
-                }
-                maps.add(map)
-            }
-            Log.d(tag,"CCC")
-            for(j in 0..19){
-                var table:Table= Table(Random.nextInt(1,4)*2,j,maps[j])
-                tableList.add(table)
-            }
-            r.map!!.put(date,tableList!!)
-            Log.d(tag,"DDD")
-            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
-
-        }
-        databaseRef!!.child("Reservations").setValue(r.map!!)
 
 
 
@@ -163,19 +161,19 @@ class DatabseTestingActivity : AppCompatActivity() {
 
 
 //        arrayOfDishes= ArrayList()
-//        databaseRef!!.child("Dishes").child("Carbonara").child("image").setValue("carbonara.jpg")
-//        databaseRef!!.child("Dishes").child("Bolognese").child("image").setValue("bolognese.jpg")
-//        databaseRef!!.child("Dishes").child("Pesto").child("image").setValue("pesto.jpg")
-//        databaseRef!!.child("Dishes").child("Quattro Fromaggi").child("image").setValue("quattro_fromaggi.jpg")
-//        databaseRef!!.child("Dishes").child("Aglio e olio").child("image").setValue("aglio_e_olio.jpg")
-//        databaseRef!!.child("Dishes").child("Napolitana").child("image").setValue("napolitana.j[g")
-//        databaseRef!!.child("Dishes").child("Alfredo Tacchini").child("image").setValue("alfredo_tacchini.jpg")
-//        databaseRef!!.child("Dishes").child("Amatriciana").child("image").setValue("amatriciana.jpg")
-//        databaseRef!!.child("Dishes").child("Funghi").child("image").setValue("funghi.jpg")
-//        databaseRef!!.child("Dishes").child("Arrabbiata").child("image").setValue("arrabbiata.jpg")
-//        databaseRef!!.child("Dishes").child("Nutella Pancakes").child("image").setValue("nutella_pancakes.jpg")
-//        databaseRef!!.child("Dishes").child("Baklava").child("image").setValue("baklava.jpg")
-//        databaseRef!!.child("Dishes").child("Apple Pie").child("image").setValue("apple_pie.jpg")
+//        databaseRef!!.child("Dishes").child("Carbonara").child("image").setValue("carbonara")
+//        databaseRef!!.child("Dishes").child("Bolognese").child("image").setValue("bolognese")
+//        databaseRef!!.child("Dishes").child("Pesto").child("image").setValue("pesto")
+//        databaseRef!!.child("Dishes").child("Quattro Fromaggi").child("image").setValue("quattro_fromaggi")
+//        databaseRef!!.child("Dishes").child("Aglio e olio").child("image").setValue("aglio_e_olio")
+//        databaseRef!!.child("Dishes").child("Napolitana").child("image").setValue("napolitana")
+//        databaseRef!!.child("Dishes").child("Alfredo Tacchini").child("image").setValue("alfredo_tacchini")
+//        databaseRef!!.child("Dishes").child("Amatriciana").child("image").setValue("amatriciana")
+//        databaseRef!!.child("Dishes").child("Funghi").child("image").setValue("funghi")
+//        databaseRef!!.child("Dishes").child("Arrabbiata").child("image").setValue("arrabbiata")
+//        databaseRef!!.child("Dishes").child("Nutella Pancakes").child("image").setValue("nutella_pancakes")
+//        databaseRef!!.child("Dishes").child("Baklava").child("image").setValue("baklava")
+//        databaseRef!!.child("Dishes").child("Apple Pie").child("image").setValue("apple_pie")
 
         /*
         var d1 = Dish("Carbonara","Italijanska pasta ciji su glavni sastojci neutralna pavlaka, jaja i slanina",0F,0,0F,30,Type.MAIN)
@@ -231,11 +229,56 @@ class DatabseTestingActivity : AppCompatActivity() {
     }
 
     fun getDishes(dataSnapshot:DataSnapshot){
+        arrayOfDishes=ArrayList<Dish>()
+        var m=0
         for(i in dataSnapshot.children){
             var dish = i.getValue(Dish::class.java)
             arrayOfDishes!!.add(dish!!)
+
         }
-        generateReceipts(arrayOfDishes!!)
+/*
+        for(i in 1..150){
+            var date:String = "2019"+Random.nextInt(10,12).toString()+ (10+i%18).toString()
+            var numD= arrayOfDishes!!.size
+
+
+
+            for(j in 1..5){
+                var rate =Random.nextInt(3,6)
+                var k = databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).push().key
+                var r = Review(rate.toFloat() ,date,"")
+                var sum=0f
+                var num=0
+
+                sum=arrayOfDishes!![i%numD].sumGrade
+                num=arrayOfDishes!![i%numD].numOfRev
+
+                sum+=rate
+                num++
+
+
+                val avg = sum/(num.toFloat())
+                arrayOfDishes!![i%numD].numOfRev=num
+                arrayOfDishes!![i%numD].grade=avg.toFloat()
+                arrayOfDishes!![i%numD].sumGrade=sum
+                databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).child(k!!).child("rating").setValue(r)
+
+            }
+
+
+
+            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
+
+        }
+        var s= arrayOfDishes!!.size
+        for(i in 0..s-1){
+            databaseRef!!.child("Dishes").child(arrayOfDishes!![i].name).child("sumGrade").setValue(arrayOfDishes!![i].sumGrade)
+            databaseRef!!.child("Dishes").child(arrayOfDishes!![i].name).child("numOfRev").setValue(arrayOfDishes!![i].numOfRev)
+            databaseRef!!.child("Dishes").child(arrayOfDishes!![i].name).child("grade").setValue(arrayOfDishes!![i].grade)
+        }
+        */
+
+
 
     }
 

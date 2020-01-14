@@ -44,14 +44,14 @@ class ProfileFragment(val user:Customer) : Fragment() {
         txtEmail.text=user.email
 
         val txtNumber=inflate.findViewById<TextView>(R.id.tvNumber)
-        txtNumber.text=user.id
+        txtNumber.text="+381 6499008877"
 
         val txtPoints=inflate.findViewById<TextView>(R.id.tvPoints)
         txtPoints.text=user.credits.toString()
 
 //region Dialog_za_ViewAllReviews
 
-        val btnViewAll=inflate.findViewById<TextView>(R.id.tvButton)
+      /*  val btnViewAll=inflate.findViewById<TextView>(R.id.tvButton)
         btnViewAll.setOnClickListener{
             val dialog=AlertDialog.Builder(context)
             val dialogView=layoutInflater.inflate(R.layout.custom_dialog,null)
@@ -61,7 +61,9 @@ class ProfileFragment(val user:Customer) : Fragment() {
             dialog.setPositiveButton("Back",null)
           //  dialog.setCancelable(false)
             dialog.show()
-        }
+            */
+
+
 
 
 
