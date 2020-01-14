@@ -10,8 +10,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OwnerReviewFragment.OnFragmentInteractionListener {
     override fun onFragmentInteraction(uri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+       //toodo
+
+
+
+          }
 
     val tag:String="TAGG"
 
@@ -40,6 +43,8 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d("owner","usao u owner")
         setContentView(R.layout.activity_owner)
         var nav_view=findViewById<BottomNavigationView>(R.id.bottom_navigation_owner)
         nav_view.setOnNavigationItemSelectedListener(this)
