@@ -7,12 +7,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="50dp">
     <ImageView
-        android:id="@+id/dishImage"
+        android:id="@+id/iarrabbiata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/arrabbiata"
         />
-
 </RelativeLayout>
 </ScrollView>

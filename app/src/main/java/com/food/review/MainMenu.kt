@@ -1,6 +1,7 @@
 package com.food.review
 import android.content.Context
 import android.content.Intent
+import android.content.res.TypedArray
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,7 +19,9 @@ import com.google.firebase.database.*
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener ,
@@ -141,12 +144,15 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
         }
     }
     fun connectImages(arr:ArrayList<Dish>){
-        //var ima:ImageView?=findViewById(R.id.dishImage)
+
+
+
         var string="aglio_e_olio.jpg"
         val id0 = resources.getIdentifier("com.food.review:drawable/$string", null, null)
         Log.d("TAG",id0.toString())
         Log.d("TAG",arr[0].name)
         arr[0].myImage= ImageView(this)
+        //arr[0].myImage!!.setImageResource(id0)
         arr[0].myImage!!.setImageResource(id0)
         Log.d("TAG",arr[0].myImage.toString())
 
@@ -213,25 +219,6 @@ class MainMenu : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelec
         arr[12].myImage= ImageView(this)
         arr[12].myImage!!.setImageResource(id12)
 
-        /*map.set("carbonara.jpg",applicationContext.getDrawable().)
-        map.set("agilo_e_olio.jpg",R.drawable.agilo_e_olio)
-        map.set("carbonara.jpg",R.drawable.carbonara)
-        map.set("alfredo_tacchini.jpg",R.drawable.alfredo_tacchini)
-        map.set("amatriciana.jpg",R.drawable.amatriciana)
-        map.set("napolitana.jpg",R.drawable.napolitana)
-        map.set("apple_pie.jpg",R.drawable.apple_pie)
-        map.set("arrabbiata.jpg",R.drawable.arrabbiata)
-        map.set("baklava.jpg",R.drawable.baklava)
-        map.set("bolognese.jpg",R.drawable.bolognese)
-        map.set("funghi.jpg",R.drawable.funghi)
-        map.set("pesto.jpg",R.drawable.pesto)
-        map.set("nutella_pancakes.jpg",R.drawable.nutella_pancakes)
-        map.set("quattro_fromaggi.jpg",R.drawable.quattro_fromaggi)
-
-
-        for(i:Dish in arr){
-            val num=map[i.name]
-            i.myImage=R.id.num*/
 
     }
 

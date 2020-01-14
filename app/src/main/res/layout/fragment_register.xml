@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/food"
-    tools:context=".RegisterFragment">
+    tools:context=".RegisterFragment"
+   >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/tv_logo"
         android:layout_width="wrap_content"
@@ -110,7 +109,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_below="@+id/et_repassword">
 
         <Button
             android:id="@+id/btn_register"
@@ -119,10 +119,11 @@
             android:background="@drawable/btn_rounded"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_centerInParent="true"
             android:layout_above="@id/btn_go_to_login"
             android:textColor="@android:color/white"
+
             android:text="REGISTER"/>
 
         <Button
@@ -144,8 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-
+            android:layout_marginBottom="0dp"
             android:text="© M. Grbusic, A. Ristic, N. Stankovic, J. Juric, N. Jovic"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="15sp"
@@ -153,6 +153,6 @@
             android:visibility="visible" />
 
     </RelativeLayout>
-    </ScrollView>
+
 
 </LinearLayout>
