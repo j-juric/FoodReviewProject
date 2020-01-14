@@ -9,79 +9,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="3"
-    android:background="@drawable/gradientbackground_ar">
+    android:background="@drawable/food">
 
 
 
-    <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardBackgroundColor="#E5E8F5"
-        >
-        <Button
+
+    <Button
             android:id="@+id/btn_booking_btnMyReservation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="19dp"
-            android:background="@drawable/reservation_small_btn"
+            android:background="@drawable/btn_rounded"
             android:textColor="#FFF"
             android:text="View my reservation "
             >
-
-        </Button>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="15dp"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardBackgroundColor="#E5E8F5"
-        >
+    </Button>
     <Button
         android:id="@+id/btn_booking_date"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="19dp"
-        android:background="@drawable/buttonstylegradient_ar"
+        android:background="@drawable/btn_rounded"
         android:textColor="#FFF"
-        android:text="Chose date"
-
-
+        android:text="Choose date"
         >
-
     </Button>
-    </androidx.cardview.widget.CardView>
-
-
-
-    <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="15dp"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardBackgroundColor="#E5E8F5"
-        >
     <Button
         android:id="@+id/btn_booking_time"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="19dp"
-        android:background="@drawable/buttonstylegradient_ar"
+        android:background="@drawable/btn_rounded"
         android:textColor="#FFF"
-        android:text="Chose time">
+        android:text="Choose time">
 
     </Button>
-    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -102,16 +64,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number of persons: "
+                android:text="Number of people: "
                 android:layout_margin="15dp"
                 android:layout_marginEnd="0dp"
-                android:id="@+id/res_spinner"></TextView>
+                android:id="@+id/res_spinner">
+
+            </TextView>
         <Spinner
             android:id="@+id/spinn_booking_numPeople"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="8dp"
-            android:background="@drawable/buttonstylegradient_ar"
+            android:background="@color/fui_bgPhone"
             android:textColor="#FFF"
             >
 
@@ -120,30 +84,17 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardBackgroundColor="#E5E8F5"
-        >
         <Button
             android:id="@+id/btn_booking_book"
-            android:layout_width="240dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="19dp"
-            android:background="@drawable/reservation_small_btn"
+            android:background="@drawable/btn_rounded"
             android:textColor="#FFF"
             android:text="Book "
             >
 
         </Button>
-    </androidx.cardview.widget.CardView>
 
 
 </LinearLayout>
