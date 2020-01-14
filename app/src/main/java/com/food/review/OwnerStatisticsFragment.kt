@@ -62,6 +62,8 @@ class OwnerStatisticsFragment : Fragment() {
         rad.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup,i->
         })
 
+        var reviews=ArrayList<Review>()
+        var arrayOfDish=
 
 
         return v
