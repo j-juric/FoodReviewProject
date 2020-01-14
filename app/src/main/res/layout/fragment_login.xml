@@ -3,30 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/food"
     tools:context=".LoginFragment">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="50sp"
-        android:fontFamily="@font/coming_soon"
+        android:layout_above="@id/tv_subtitle"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="10dp"
-        android:layout_above="@id/tv_subtitle"/>
+        android:alpha="1"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="50sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to our app"
-        android:textSize="17sp"
-        android:fontFamily="@font/coming_soon"
+        android:layout_above="@id/et_email"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="50dp"
-        android:layout_above="@id/et_email"
-        />
+        android:alpha="1"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="Welcome to our app"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="27sp" />
 
     <EditText
         android:id="@+id/et_email"
@@ -62,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_password"
-        android:background="@drawable/btn_custom"
+        android:background="@drawable/btn_rounded"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="15dp"
@@ -75,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_login"
-        android:background="@drawable/btn_custom"
+        android:background="@drawable/btn_rounded"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="15dp"
@@ -88,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_go_to_register"
-        android:background="@drawable/btn_custom"
+        android:background="@drawable/btn_rounded"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="15dp"
@@ -101,11 +109,14 @@
         android:id="@+id/copyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="© M. Grbusic, A. Ristic, N. Stankovic, J. Juric, N. Jovic"
-        android:textSize="15sp"
-
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="© M. Grbusic, A. Ristic, N. Stankovic, J. Juric, N. Jovic"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

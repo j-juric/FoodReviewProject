@@ -70,8 +70,8 @@ class RateFragment(var receipt: Receipt,val userId:String,val receiptId:String,v
             for(ord in receipt.orders!!.keys){
                 Log.d(tag,ord.toString())
                 var r = Review(ratingList[i].rating,"20200115",commList[i].text.toString())
-                databaseRef!!.child("Reviews").child(ord).setValue(r)
-
+                var k = databaseRef!!.child("Reviews").child(ord).child(r.date).push().key
+                databaseRef!!.child("Reviews").child(ord).child(r.date).child(k!!).setValue(r)
                 var sum=0f
                 var num=0
                 for(j in 0..arrayOfDishes.size){
