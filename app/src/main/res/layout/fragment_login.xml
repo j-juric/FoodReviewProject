@@ -16,8 +16,9 @@
         android:alpha="1"
         android:fontFamily="@font/bowlby_one_sc"
         android:text="@string/app_name"
-        android:textSize="60sp"
-        android:textAppearance="#000000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="50sp"
         android:textStyle="bold" />
 
     <TextView
@@ -30,8 +31,10 @@
         android:alpha="1"
         android:fontFamily="@font/bowlby_one_sc"
         android:text="Welcome to our app"
-        android:textAppearance="#000000"
-        android:textSize="30sp" />
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="27sp" />
 
     <EditText
         android:id="@+id/et_email"
@@ -106,13 +109,14 @@
         android:id="@+id/copyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="© M. Grbusic, A. Ristic, N. Stankovic, J. Juric, N. Jovic"
-        android:textStyle="bold"
-        android:textAppearance="#000000"
-        android:textSize="15sp"
-
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="© M. Grbusic, A. Ristic, N. Stankovic, J. Juric, N. Jovic"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
