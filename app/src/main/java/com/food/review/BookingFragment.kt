@@ -290,9 +290,9 @@ class BookingFragment(val user:Customer) : Fragment() {
                                     )
                                     user.reservationTime=datumpravi+pravoVreme.substring(0,2)+pravoVreme.substring(3,5)
                                     Log.d("Vreme rezervacije", user.reservationTime)
-                                    //databaseRef!!.child("Reservations").child(datumpravi).child(stolovi[jj].id.toString()).child("dailyReservations").child(pravoVreme).setValue(user.firstName+user.lastName)
-                                    //databaseRef!!.child("Users").child("Customers").child(user.id).child("reservationTime").setValue(datumpravi+pravoVreme.substring(0,1)+pravoVreme.substring(3,4))
-                                    //user.reservationTime=datumpravi+pravoVreme.substring(0,1)+pravoVreme.substring(3,4)   //user je customer objekat koji je dobijen preko konstruktora
+                                    databaseRef!!.child("Reservations").child(datumpravi).child(stolovi[jj].id.toString()).child("dailyReservations").child(pravoVreme).setValue(user.firstName+user.lastName)
+                                    databaseRef!!.child("Users").child("Customers").child(user.id).child("reservationTime").setValue(datumpravi+pravoVreme.substring(0,1)+pravoVreme.substring(3,4))
+                                    user.reservationTime=datumpravi+pravoVreme.substring(0,1)+pravoVreme.substring(3,4)   //user je customer objekat koji je dobijen preko konstruktora
                                 }
 
 
@@ -447,7 +447,7 @@ class BookingFragment(val user:Customer) : Fragment() {
                             dialog.setMessage("Date: " + pom + "\n" + "Time: " + pom1)
 
                             dialog.setNegativeButton("Cancel reservation",
-                                DialogInterface.OnClickListener { dialog, which ->
+                                DialogInterface.OnClickListener { dialog, _ ->
 
                                     Log.d("diacancel","asd")
                                 })

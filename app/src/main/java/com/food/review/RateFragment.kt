@@ -71,6 +71,7 @@ class RateFragment(var receipt: Receipt,val userId:String,val receiptId:String,v
                 Log.d(tag,ord.toString())
                 var r = Review(ratingList[i].rating,"20200115",commList[i].text.toString())
                 var k = databaseRef!!.child("Reviews").child(ord).child(r.date).push().key
+                databaseRef!!.child("Receipts").child(receiptId).child("scanned").setValue(true)
                 databaseRef!!.child("Reviews").child(ord).child(r.date).child(k!!).setValue(r)
                 var sum=0f
                 var num=0

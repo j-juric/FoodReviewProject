@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OwnerReviewFragment.OnFragmentInteractionListener {
     override fun onFragmentInteraction(uri: Uri) {
@@ -16,6 +18,9 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
 
           }
 
+    var databaseRef: DatabaseReference?=null
+    var arrayOfDishes: ArrayList<Dish> ?= null
+
     val tag:String="TAGG"
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -23,11 +28,11 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
         var selectedFragment: Fragment?=null
         when (item.itemId) {
             R.id.nav_statistics_owner -> {
-                selectedFragment= OwnerStatisticsFragment()
+                selectedFragment= OwnerStatisticsFragment(arrayOfDishes!!)
                 setTitle("Statistics")
             }
             R.id.nav_reviews_owner -> {
-                selectedFragment= OwnerReviewFragment()
+                selectedFragment= OwnerReviewFragment(arrayOfDishes!!)
                 setTitle("Reviews")
             }
             R.id.nav_reservations_owner -> {
@@ -46,10 +51,45 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
 
         Log.d("owner","usao u owner")
         setContentView(R.layout.activity_owner)
-        var nav_view=findViewById<BottomNavigationView>(R.id.bottom_navigation_owner)
-        nav_view.setOnNavigationItemSelectedListener(this)
-        supportFragmentManager.beginTransaction().replace(R.id.owner_fragment_container,
-            OwnerStatisticsFragment()
-        ).commit()
+
+        databaseRef= FirebaseDatabase.getInstance().reference
+        var dref: DatabaseReference =databaseRef!!.child("Dishes")
+        val context=this
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if(dataSnapshot.exists()){
+                    Log.d(tag, "loadPost:onComplete")
+                    getDishes(dataSnapshot)
+                    var nav_view=findViewById<BottomNavigationView>(R.id.bottom_navigation_owner)
+                    nav_view.setOnNavigationItemSelectedListener(context)
+                    supportFragmentManager.beginTransaction().replace(R.id.owner_fragment_container,
+                        OwnerStatisticsFragment(arrayOfDishes!!)
+                    ).commit()
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+        dref.addValueEventListener(postListener)
+
+
+    }
+
+    fun getDishes(dataSnapshot:DataSnapshot){
+        arrayOfDishes= ArrayList()
+        for(i in dataSnapshot.children){
+            var dish = i.getValue(Dish::class.java)
+            arrayOfDishes!!.add(dish!!)
+        }
+        for( i in arrayOfDishes!!){
+            Log.d(tag,i.toString())
+        }
     }
 }
