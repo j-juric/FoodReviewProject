@@ -12,5 +12,13 @@
         android:layout_height="256dp"
         android:layout_marginStart="75dp"
         android:layout_marginTop="200dp"/>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/btn_generate"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/QR_Image"
+        android:text="GENERATE"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+></Button>
 </RelativeLayout>

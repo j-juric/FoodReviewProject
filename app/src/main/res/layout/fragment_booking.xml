@@ -92,8 +92,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="8dp"
+            android:layout_gravity="center"
             android:background="@drawable/btn_rounded"
             android:textColor="#FFF"
+            android:spinnerMode="dropdown"
             >
 
         </Spinner>

@@ -121,7 +121,7 @@ class BookingFragment(val user:Customer) : Fragment() {
 
                         val probniSize = 4
                         Log.d("testFirstString", probniSize.toString())
-
+                        Log.d("kraj",reservations.toString())
                         var i = 0
                         var p = true
 
@@ -290,9 +290,9 @@ class BookingFragment(val user:Customer) : Fragment() {
                                     )
                                     user.reservationTime=datumpravi+pravoVreme.substring(0,2)+pravoVreme.substring(3,5)
                                     Log.d("Vreme rezervacije", user.reservationTime)
-                                    //databaseRef!!.child("Reservations").child(datumpravi).child(stolovi[jj].id.toString()).child("dailyReservations").child(pravoVreme).setValue(user.firstName+user.lastName)
-                                    //databaseRef!!.child("Users").child("Customers").child(user.id).child("reservationTime").setValue(datumpravi+pravoVreme.substring(0,1)+pravoVreme.substring(3,4))
-                                    //user.reservationTime=datumpravi+pravoVreme.substring(0,1)+pravoVreme.substring(3,4)   //user je customer objekat koji je dobijen preko konstruktora
+                                    databaseRef!!.child("Reservations").child(datumpravi).child(stolovi[jj].id.toString()).child("dailyReservations").child(pravoVreme).setValue(user.firstName+user.lastName)
+                                    databaseRef!!.child("Users").child("Customers").child(user.id).child("reservationTime").setValue(datumpravi+pravoVreme.substring(0,1)+pravoVreme.substring(3,4))
+                                    user.reservationTime=datumpravi+pravoVreme.substring(0,1)+pravoVreme.substring(3,4)   //user je customer objekat koji je dobijen preko konstruktora
                                 }
 
 
@@ -318,6 +318,7 @@ class BookingFragment(val user:Customer) : Fragment() {
 
                     btn_Date.setOnClickListener {
                         val now = Calendar.getInstance()
+
                         val datePicker = DatePickerDialog(
                             context!!, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                                 val selectedDate = Calendar.getInstance()
@@ -351,22 +352,22 @@ class BookingFragment(val user:Customer) : Fragment() {
                             },
                             now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
                         )
-                       datePicker.datePicker.minDate=System.currentTimeMillis()
+                        var disableToday=8.64*10000000
+                       datePicker.datePicker.minDate=System.currentTimeMillis()+disableToday.toLong()
                         Log.d("timee",System.currentTimeMillis().toString())
-                        var day15=8.64*10000000*15
+                        var day15=8.64*10000000*14
                         datePicker.datePicker.maxDate=System.currentTimeMillis()+day15.toLong()
                        // datePicker.datePicker.maxDate=System.
                         datePicker.show()
                         try {
-                            //if (btn_Date.text != "Chose date") {
+                           {
                             val date = timeFormat.parse(btn_Date.text.toString())
                             now.time = date
-                            // }
+                             }
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
                     }
-
 
                     optionsSpinner=inflate.findViewById(R.id.spinn_booking_numPeople)
                     result=inflate.findViewById(R.id.res_spinner)
@@ -387,16 +388,9 @@ class BookingFragment(val user:Customer) : Fragment() {
                             id: Long
                         ) {
                             //Toast.makeText(context!!, "position : " + position, Toast.LENGTH_SHORT).show()
-                            Log.d("booking",arrayOptions[position].toString())
                             velicina=arrayOptions[position]
-                            Log.d("brojLjudi",arrayOptions[position].toString())
                             //result.text=arrayOptions[position].toString()
-                            result.text="Time of the day:"
-
-
-
-
-
+                           // result.text="Time of the day
                         }
                     }
 
@@ -453,7 +447,7 @@ class BookingFragment(val user:Customer) : Fragment() {
                             dialog.setMessage("Date: " + pom + "\n" + "Time: " + pom1)
 
                             dialog.setNegativeButton("Cancel reservation",
-                                DialogInterface.OnClickListener { dialog, which ->
+                                DialogInterface.OnClickListener { dialog, _ ->
 
                                     Log.d("diacancel","asd")
                                 })

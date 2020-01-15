@@ -74,12 +74,15 @@ class ScanFragment(val id:String,val arrayOfDishes: ArrayList<Dish>): Fragment()
                     if (receipt!!.scanned){
                         Toast.makeText(activity, "It appears the code has already been scanned", Toast.LENGTH_LONG).show()
                     }
-                    val fragment = RateFragment(receipt,id,dataSnapshot.key!!, arrayOfDishes)
-                    val fragmentManager = activity!!.supportFragmentManager
-                    val fragmentTransaction = fragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.fragment_container, fragment)
-                    fragmentTransaction.addToBackStack(null)
-                    fragmentTransaction.commit()
+                    else{
+                        val fragment = RateFragment(receipt,id,dataSnapshot.key!!, arrayOfDishes)
+                        val fragmentManager = activity!!.supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(R.id.fragment_container, fragment)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+                    }
+
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {
@@ -111,7 +114,7 @@ class ScanFragment(val id:String,val arrayOfDishes: ArrayList<Dish>): Fragment()
     override fun onQRCodeRead(text: String?, points: Array<out PointF>?) {
 
         if(flag){
-            Toast.makeText(activity, text, Toast.LENGTH_LONG).show()
+
             var sref = databaseRef!!.child("Receipts").child(text!!)
             sref.addValueEventListener(scanListener!!)
             flag=false
