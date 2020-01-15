@@ -1,6 +1,7 @@
 package com.food.review
 
 import android.content.Context
+import android.media.Rating
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,11 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import com.google.firebase.database.DataSnapshot
 import kotlinx.android.synthetic.main.fragment_owner_review.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.RatingBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,6 +48,12 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
 
     var dishNames=ArrayList<String>(dishes.size)
 
+    var databaseRef: DatabaseReference?=null
+
+
+
+    var tagg="TAGG"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -63,6 +71,29 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
         val btn_show = v.findViewById<View>(R.id.show)
         var spn_dishes=v.findViewById<View>(R.id.spnDishes) as Spinner
         var stars=v.findViewById<View>(R.id.stars) as RatingBar
+
+        databaseRef= FirebaseDatabase.getInstance().reference
+
+        var rref = databaseRef!!.child("Reviews")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if(dataSnapshot.exists()){
+                    Log.d(tag, "CITA PODATKE")
+                    getRatings(dataSnapshot)
+
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+        rref.addValueEventListener(postListener)
 
         staticReviws!!.add(rev1)
         staticReviws!!.add(rev2)
@@ -134,5 +165,24 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
         fun onFragmentInteraction(uri: Uri)
     }
 
+    fun getRatings(dataSnapshot: DataSnapshot){
+        for(i in dataSnapshot.children){ //za svaki dish
+            val key = i.key
+            var lst = ArrayList<Review>()
+            for(j in i.children){   // za svaki datum
+                for(k in j.children) {    //za svaki djavo
+
+                    Log.d(tagg,"ASDASDASD")
+                    Log.d(tagg,k.value.toString())
+
+                    var r = k.getValue(Review::class.java)
+
+                    lst.add(r!!)
+                }
+            }
+            mapReview!!.set(key!!,lst)
+        }
+        Log.d(tagg,mapReview.toString())
+    }
 
 }

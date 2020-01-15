@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlin.random.Random
 
 class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OwnerReviewFragment.OnFragmentInteractionListener {
     override fun onFragmentInteraction(uri: Uri) {
@@ -88,8 +89,26 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
             var dish = i.getValue(Dish::class.java)
             arrayOfDishes!!.add(dish!!)
         }
-        for( i in arrayOfDishes!!){
-            Log.d(tag,i.toString())
+/*
+        for(i in 1..150){
+            var date:String = "2019"+ Random.nextInt(10,12).toString()+ (10+i%18).toString()
+            var numD= arrayOfDishes!!.size
+
+
+
+            for(j in 1..5){
+                var rate = Random.nextInt(3,6)
+                var k = databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).push().key
+                var r = Review(rate.toFloat() ,date,"")
+                databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).child(k!!).setValue(r)
+
+            }
+
+
+
+            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
+
         }
+*/
     }
 }
