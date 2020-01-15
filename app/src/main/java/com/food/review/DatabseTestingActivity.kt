@@ -50,7 +50,7 @@ class DatabseTestingActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         database= FirebaseDatabase.getInstance()
         databaseRef=FirebaseDatabase.getInstance().reference
-
+        databaseRef!!.child("Reviews").removeValue()
         Log.d(tag,"OTVORI SE SEZAME")
         qrImage=this.QR_Image as ImageView
         btn_gen=this.btn_generate as Button
@@ -94,6 +94,8 @@ class DatabseTestingActivity : AppCompatActivity() {
         receiptList.add("-Lyan7GPQ9vZTZT5tlj8")
         receiptList.add("-Lyan7GSGOFX5pigF6x7")
         receiptList.add("-Lyan7GtEJ_HcDdp9Ohp")
+
+
 
         val manager = getSystemService(WINDOW_SERVICE) as WindowManager
         val display = manager.defaultDisplay
@@ -260,7 +262,7 @@ class DatabseTestingActivity : AppCompatActivity() {
 
         }
 
-/*
+
         for(i in 1..150){
             var date:String = "2019"+Random.nextInt(10,12).toString()+ (10+i%18).toString()
             var numD= arrayOfDishes!!.size
@@ -285,7 +287,7 @@ class DatabseTestingActivity : AppCompatActivity() {
                 arrayOfDishes!![i%numD].numOfRev=num
                 arrayOfDishes!![i%numD].grade=avg.toFloat()
                 arrayOfDishes!![i%numD].sumGrade=sum
-                databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).child(k!!).child("rating").setValue(r)
+                databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).child(k!!).setValue(r)
 
             }
 
@@ -294,13 +296,13 @@ class DatabseTestingActivity : AppCompatActivity() {
             //databaseRef!!.child("Reservations").child(date).setValue(tableList)
 
         }
-        var s= arrayOfDishes!!.size
-        for(i in 0..s-1){
-            databaseRef!!.child("Dishes").child(arrayOfDishes!![i].name).child("sumGrade").setValue(arrayOfDishes!![i].sumGrade)
-            databaseRef!!.child("Dishes").child(arrayOfDishes!![i].name).child("numOfRev").setValue(arrayOfDishes!![i].numOfRev)
-            databaseRef!!.child("Dishes").child(arrayOfDishes!![i].name).child("grade").setValue(arrayOfDishes!![i].grade)
-        }
-        */
+//        var s= arrayOfDishes!!.size
+//        for(i in 0..s-1){
+//            databaseRef!!.child("Dishes").child(arrayOfDishes!![i].name).child("sumGrade").setValue(arrayOfDishes!![i].sumGrade)
+//            databaseRef!!.child("Dishes").child(arrayOfDishes!![i].name).child("numOfRev").setValue(arrayOfDishes!![i].numOfRev)
+//            databaseRef!!.child("Dishes").child(arrayOfDishes!![i].name).child("grade").setValue(arrayOfDishes!![i].grade)
+//        }
+
 
 
 

@@ -1,20 +1,20 @@
 package com.food.review
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import com.google.firebase.database.DataSnapshot
+import android.widget.*
 import kotlinx.android.synthetic.main.fragment_owner_review.*
-import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.RatingBar
+import com.google.firebase.database.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,6 +35,9 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    var table : TableLayout?=null
+
     var mapReview:HashMap<String,ArrayList<Review>>?=HashMap()
     var staticReviws:ArrayList<Review>?= ArrayList()
     var rev1=Review(2.0f,"20200115","Super pasta, vraticu se uopet sigurno!")
@@ -43,8 +46,13 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
 
     var dishes = ArrayList<Dish>(arrayOfDishes)
     var mapForSpiner:HashMap<Dish,String>?= HashMap()
-
+    var selectedDish:Dish?=Dish()
     var dishNames=ArrayList<String>(dishes.size)
+    var databaseRef: DatabaseReference?=null
+
+
+
+    var tagg="TAGG"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +71,29 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
         val btn_show = v.findViewById<View>(R.id.show)
         var spn_dishes=v.findViewById<View>(R.id.spnDishes) as Spinner
         var stars=v.findViewById<View>(R.id.stars) as RatingBar
+
+        databaseRef= FirebaseDatabase.getInstance().reference
+
+        var rref = databaseRef!!.child("Reviews")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if(dataSnapshot.exists()){
+                    Log.d(tag, "CITA PODATKE")
+                    getRatings(dataSnapshot)
+
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.d(tag, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+        rref.addValueEventListener(postListener)
 
         staticReviws!!.add(rev1)
         staticReviws!!.add(rev2)
@@ -115,7 +146,32 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
 
 
         btn_show.setOnClickListener{
+            Log.d("TAG",selectedDish!!.name)
+            var scroll=v!!.findViewById<View>(R.id.scroll_view)
+            this.table= v.findViewById(R.id.table)
+            var i:Int=0
+            arrayOfDishes!!.forEach { d:Dish->
+                var row = TableRow(activity)
+                row.layoutParams = TableRow.LayoutParams(
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    2.0f
+                )
 
+                var txtName = TextView(activity)
+                txtName.textSize = 23.0F
+                txtName.setTypeface(Typeface.MONOSPACE)
+                if(i%2==0)
+                    row.setBackgroundColor(Color.parseColor("#43C5A5"))
+
+                txtName.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f)
+                val param1 = txtName.layoutParams as TableRow.LayoutParams
+                txtName.setText(d.name)
+                txtName.gravity= Gravity.CENTER
+                row.addView(txtName)
+                this.table!!.addView(row)
+                i++
+            }
         }
 
 
@@ -134,5 +190,24 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
         fun onFragmentInteraction(uri: Uri)
     }
 
+    fun getRatings(dataSnapshot: DataSnapshot){
+        for(i in dataSnapshot.children){ //za svaki dish
+            val key = i.key
+            var lst = ArrayList<Review>()
+            for(j in i.children){   // za svaki datum
+                for(k in j.children) {    //za svaki djavo
+
+                    Log.d(tagg,"ASDASDASD")
+                    Log.d(tagg,k.value.toString())
+
+                    var r = k.getValue(Review::class.java)
+
+                    lst.add(r!!)
+                }
+            }
+            mapReview!!.set(key!!,lst)
+        }
+        Log.d(tagg,mapReview.toString())
+    }
 
 }
