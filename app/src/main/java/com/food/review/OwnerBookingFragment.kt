@@ -75,16 +75,16 @@ class OwnerBookingFragment : Fragment() {
     fun draw(){
         var covek1=Customer()
         covek1.reservationTime="20200121"
-        covek1.firstName="djole"
-        covek1.lastName="petrovic"
+        covek1.firstName="Rayn"
+        covek1.lastName="Edvards"
         var covek2=Customer()
         covek2.reservationTime="20211121"
-        covek2.firstName="djolew"
-        covek2.lastName="petrovicw"
+        covek2.firstName="Alicia"
+        covek2.lastName="Dawn"
         var covek3=Customer()
         covek3.reservationTime="20222121"
-        covek3.firstName="djoleww"
-        covek3.lastName="petrovicww"
+        covek3.firstName="Katrin"
+        covek3.lastName="Jhones"
         ljudi.add(covek1)
         ljudi.add(covek2)
         ljudi.add(covek3)
@@ -102,7 +102,7 @@ class OwnerBookingFragment : Fragment() {
             var txtName = TextView(this.context)
             txtName.textSize = 24.0F
             if(i%2==0)
-                row.setBackgroundColor(Color.parseColor("#EEEEDD"))
+                row.setBackgroundColor(Color.parseColor("#43C5A5"))
 
             txtName.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f)
             val param1 = txtName.layoutParams as TableRow.LayoutParams
