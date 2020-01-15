@@ -41,6 +41,8 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
                 setTitle("Statistics")
             }
             R.id.nav_reviews_owner -> {
+
+                .4
                 selectedFragment= OwnerReviewFragment(arrayOfDishes!!)
                 setTitle("Reviews")
             }
