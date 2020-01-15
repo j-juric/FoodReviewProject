@@ -19,6 +19,7 @@ import android.graphics.Point
 import android.view.WindowManager
 
 import android.graphics.Bitmap
+import android.widget.Button
 import android.widget.Toast
 import kotlin.random.Random
 
@@ -29,9 +30,15 @@ class DatabseTestingActivity : AppCompatActivity() {
     var databaseRef:DatabaseReference?=null
     var mAuth: FirebaseAuth?=null
     var arrayOfDishes: ArrayList<Dish> ?= null
+    var arrayOfReceipt: ArrayList<Receipt> ?=null
 
     var qrImage:ImageView ?=null
     var bitmap: Bitmap? = null
+    var receiptList:ArrayList<String> = ArrayList<String>()
+
+    var btn_gen : Button?=null
+
+    var itr=1
 
 
     var reservations:ArrayList<Pair<String,ArrayList<Table>>>?=null
@@ -46,6 +53,8 @@ class DatabseTestingActivity : AppCompatActivity() {
 
         Log.d(tag,"OTVORI SE SEZAME")
         qrImage=this.QR_Image as ImageView
+        btn_gen=this.btn_generate as Button
+
         //QUERY WHICH RETURNS DATA FOR THE NEXT 14 DAYS
 //        val last14days = databaseRef!!.child("Reservations").orderByKey()
 //            .startAt("20200120")
@@ -75,6 +84,17 @@ class DatabseTestingActivity : AppCompatActivity() {
 //        last14days.addValueEventListener(postListener)
 
         val inputValue = "-LyFeDi8UN_KrSA8BuaU".trim()
+
+        receiptList.add("-Lyan7GGTSdEL2ZaDttP")
+        receiptList.add("-Lyan7GKDZDLhzEpvw5r")
+        receiptList.add("-Lyan7GLZzlmknzxIZUj")
+        receiptList.add("-Lyan7GMgw2_zisxnazX")
+        receiptList.add("-Lyan7GNUCFBfl29s4fK")
+        receiptList.add("-Lyan7GO1_FvvnA3QuZl")
+        receiptList.add("-Lyan7GPQ9vZTZT5tlj8")
+        receiptList.add("-Lyan7GSGOFX5pigF6x7")
+        receiptList.add("-Lyan7GtEJ_HcDdp9Ohp")
+
         val manager = getSystemService(WINDOW_SERVICE) as WindowManager
         val display = manager.defaultDisplay
         val point = Point()
@@ -86,7 +106,7 @@ class DatabseTestingActivity : AppCompatActivity() {
         smallerDimension = smallerDimension * 3 / 4
 
         var qrgEncoder = QRGEncoder(
-            inputValue, null,
+            receiptList[0], null,
             QRGContents.Type.TEXT,
             smallerDimension
         )
@@ -97,32 +117,35 @@ class DatabseTestingActivity : AppCompatActivity() {
             Log.d(tag, "GRESKA")
         }
 
+        btn_gen!!.setOnClickListener {
+            generateCode()
+        }
 
 
-        val key = databaseRef!!.child("Receipts").push().key
-
-        var timeList:ArrayList<String> = ArrayList<String>(6)
-
-        timeList.add("12:00")
-        timeList.add("14:00")
-        timeList.add("16:00")
-        timeList.add("18:00")
-        timeList.add("20:00")
-        timeList.add("22:00")
-
-        var nameList:ArrayList<String> = ArrayList<String>(12)
-        nameList.add("Kolumbo")
-        nameList.add("Dubravka")
-        nameList.add("Trifun")
-        nameList.add("Svetozar")
-        nameList.add("Jefimije")
-        nameList.add("Pero")
-        nameList.add("Milo")
-        nameList.add("Ratislav")
-        nameList.add("Ratimir")
-        nameList.add("Svemirko")
-        nameList.add("Josif")
-        nameList.add("Ratko")
+//        val key = databaseRef!!.child("Receipts").push().key
+//
+//        var timeList:ArrayList<String> = ArrayList<String>(6)
+//
+//        timeList.add("12:00")
+//        timeList.add("14:00")
+//        timeList.add("16:00")
+//        timeList.add("18:00")
+//        timeList.add("20:00")
+//        timeList.add("22:00")
+//
+//        var nameList:ArrayList<String> = ArrayList<String>(12)
+//        nameList.add("Kolumbo")
+//        nameList.add("Dubravka")
+//        nameList.add("Trifun")
+//        nameList.add("Svetozar")
+//        nameList.add("Jefimije")
+//        nameList.add("Pero")
+//        nameList.add("Milo")
+//        nameList.add("Ratislav")
+//        nameList.add("Ratimir")
+//        nameList.add("Svemirko")
+//        nameList.add("Josif")
+//        nameList.add("Ratko")
 
 
 //        var r = ReservationMap()
@@ -204,14 +227,14 @@ class DatabseTestingActivity : AppCompatActivity() {
         databaseRef!!.child("Dishes").child(d12.name).setValue(d12)
         databaseRef!!.child("Dishes").child(d13.name).setValue(d13)
         */
-//        var dref:DatabaseReference=databaseRef!!.child("Dishes")
+//        var dref:DatabaseReference=databaseRef!!.child("Receipts")
 //
 //        val postListener = object : ValueEventListener {
 //            override fun onDataChange(dataSnapshot: DataSnapshot) {
 //                // Get Post object and use the values to update the UI
 //                if(dataSnapshot.exists()){
 //                    Log.d(tag, "loadPost:onComplete")
-//                    getDishes(dataSnapshot)
+//                    generateCode(dataSnapshot)
 //                }
 //            }
 //
@@ -236,6 +259,7 @@ class DatabseTestingActivity : AppCompatActivity() {
             arrayOfDishes!!.add(dish!!)
 
         }
+
 /*
         for(i in 1..150){
             var date:String = "2019"+Random.nextInt(10,12).toString()+ (10+i%18).toString()
@@ -282,6 +306,29 @@ class DatabseTestingActivity : AppCompatActivity() {
 
     }
 
+    fun generateCode(){
+        val manager = getSystemService(WINDOW_SERVICE) as WindowManager
+        val display = manager.defaultDisplay
+        val point = Point()
+        display.getSize(point)
+
+        val width = point.x
+        val height = point.y
+        var smallerDimension = if (width < height) width else height
+        smallerDimension = smallerDimension * 3 / 4
+
+        var qrgEncoder = QRGEncoder(
+            receiptList[itr++], null,
+            QRGContents.Type.TEXT,
+            smallerDimension
+        )
+        try {
+            bitmap = qrgEncoder.bitmap
+            qrImage!!.setImageBitmap(bitmap)
+        } catch (e: WriterException) {
+            Log.d(tag, "GRESKA")
+        }
+    }
     fun generateReceipts( arr:ArrayList<Dish>){
 
         //var count= arr.size
