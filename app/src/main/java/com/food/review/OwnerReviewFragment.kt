@@ -39,10 +39,8 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
     var table : TableLayout?=null
 
     var mapReview:HashMap<String,ArrayList<Review>>?=HashMap()
-    var staticReviws:ArrayList<Review>?= ArrayList()
-    var rev1=Review(2.0f,"20200115","Super pasta, vraticu se uopet sigurno!")
-    var rev2=Review(4.0f,"20200110","Baklava je bila preslatka, dobio sam secernu bolest!")
-    var rev3=Review(3.5f,"20200106","Posna napolitana posto je danas badnji dan!")
+
+    var reviews :ArrayList<Review>?= ArrayList()
 
     var dishes = ArrayList<Dish>(arrayOfDishes)
     var mapForSpiner:HashMap<Dish,String>?= HashMap()
@@ -95,9 +93,6 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
         }
         rref.addValueEventListener(postListener)
 
-        staticReviws!!.add(rev1)
-        staticReviws!!.add(rev2)
-        staticReviws!!.add(rev3)
 
         for(i:Dish in dishes){
             mapForSpiner!!.put(i,i.name)
@@ -108,19 +103,6 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
 
         spn_dishes.adapter=ArrayAdapter<String>(activity!!,android.R.layout.simple_spinner_item,dishNames!!)
 
-        mapReview?.set("Aglio e olio",staticReviws!!)
-        mapReview?.set("Alfredo tacchini",staticReviws!!)
-        mapReview?.set("Amatricana",staticReviws!!)
-        mapReview?.set("Apple pie",staticReviws!!)
-        mapReview?.set("Arrabbiata",staticReviws!!)
-        mapReview?.set("Baklava",staticReviws!!)
-        mapReview?.set("Bolognese",staticReviws!!)
-        mapReview?.set("Carbonara",staticReviws!!)
-        mapReview?.set("Funghi",staticReviws!!)
-        mapReview?.set("Napolitana",staticReviws!!)
-        mapReview?.set("Nutella pancakes",staticReviws!!)
-        mapReview?.set("Pesto",staticReviws!!)
-        mapReview?.set("Quattro formaggi",staticReviws!!)
 
         spn_dishes.setOnItemSelectedListener(object : OnItemSelectedListener {
            override fun onItemSelected(
@@ -132,9 +114,9 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
                // TODO Auto-generated method stub
                var idSpinner=spn_dishes.getItemIdAtPosition(position).toInt()
                Log.d("TAG",idSpinner.toString())
-               var selectedDish=dishes[idSpinner]
-               Log.d("TAG",selectedDish.name)
-               stars.rating=selectedDish.grade
+               selectedDish=dishes[idSpinner]
+               Log.d("TAG",selectedDish!!.name)
+               stars.rating=selectedDish!!.grade
            }
 
            override fun onNothingSelected(arg0: AdapterView<*>) {
@@ -144,14 +126,20 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
 
 
 
-
         btn_show.setOnClickListener{
             Log.d("TAG",selectedDish!!.name)
             var scroll=v!!.findViewById<View>(R.id.scroll_view)
             this.table= v.findViewById(R.id.table)
+            table!!.removeAllViews()
             var i:Int=0
-            arrayOfDishes!!.forEach { d:Dish->
-                var row = TableRow(activity)
+
+
+            Log.d("TAG",mapReview.toString())
+            var id=selectedDish!!.name
+            var rlist = mapReview!!.getValue(id)!!
+            Log.d("TAG",rlist.toString())
+            rlist!!.forEach { d:Review->
+                var row = TableRow(activity!!)
                 row.layoutParams = TableRow.LayoutParams(
                     TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.MATCH_PARENT,
@@ -166,7 +154,7 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
 
                 txtName.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f)
                 val param1 = txtName.layoutParams as TableRow.LayoutParams
-                txtName.setText(d.name)
+                txtName.setText(d.comment)
                 txtName.gravity= Gravity.CENTER
                 row.addView(txtName)
                 this.table!!.addView(row)
@@ -205,7 +193,7 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
                     lst.add(r!!)
                 }
             }
-            mapReview!!.set(key!!,lst)
+            mapReview!!.put(key!!,lst)
         }
         Log.d(tagg,mapReview.toString())
     }
