@@ -1,20 +1,20 @@
 package com.food.review
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.*
 import com.google.firebase.database.DataSnapshot
 import kotlinx.android.synthetic.main.fragment_owner_review.*
-import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.RatingBar
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,6 +35,9 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    var table : TableLayout?=null
+
     var mapReview:HashMap<String,ArrayList<Review>>?=HashMap()
     var staticReviws:ArrayList<Review>?= ArrayList()
     var rev1=Review(2.0f,"20200115","Super pasta, vraticu se uopet sigurno!")
@@ -43,7 +46,7 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
 
     var dishes = ArrayList<Dish>(arrayOfDishes)
     var mapForSpiner:HashMap<Dish,String>?= HashMap()
-
+    var selectedDish:Dish?=Dish()
     var dishNames=ArrayList<String>(dishes.size)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,10 +103,8 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
            ) {
                // TODO Auto-generated method stub
                var idSpinner=spn_dishes.getItemIdAtPosition(position).toInt()
-               Log.d("TAG",idSpinner.toString())
-               var selectedDish=dishes[idSpinner]
-               Log.d("TAG",selectedDish.name)
-               stars.rating=selectedDish.grade
+               selectedDish=dishes[idSpinner]
+               stars.rating=selectedDish!!.grade
            }
 
            override fun onNothingSelected(arg0: AdapterView<*>) {
@@ -115,7 +116,32 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
 
 
         btn_show.setOnClickListener{
+            Log.d("TAG",selectedDish!!.name)
+            var scroll=v!!.findViewById<View>(R.id.scroll_view)
+            this.table= v.findViewById(R.id.table)
+            var i:Int=0
+            arrayOfDishes!!.forEach { d:Dish->
+                var row = TableRow(activity)
+                row.layoutParams = TableRow.LayoutParams(
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    2.0f
+                )
 
+                var txtName = TextView(activity)
+                txtName.textSize = 23.0F
+                txtName.setTypeface(Typeface.MONOSPACE)
+                if(i%2==0)
+                    row.setBackgroundColor(Color.parseColor("#43C5A5"))
+
+                txtName.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f)
+                val param1 = txtName.layoutParams as TableRow.LayoutParams
+                txtName.setText(d.name)
+                txtName.gravity= Gravity.CENTER
+                row.addView(txtName)
+                this.table!!.addView(row)
+                i++
+            }
         }
 
 
