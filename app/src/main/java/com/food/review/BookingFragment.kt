@@ -121,7 +121,7 @@ class BookingFragment(val user:Customer) : Fragment() {
 
                         val probniSize = 4
                         Log.d("testFirstString", probniSize.toString())
-
+                        Log.d("kraj",reservations.toString())
                         var i = 0
                         var p = true
 
@@ -318,6 +318,7 @@ class BookingFragment(val user:Customer) : Fragment() {
 
                     btn_Date.setOnClickListener {
                         val now = Calendar.getInstance()
+
                         val datePicker = DatePickerDialog(
                             context!!, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                                 val selectedDate = Calendar.getInstance()
@@ -351,22 +352,22 @@ class BookingFragment(val user:Customer) : Fragment() {
                             },
                             now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
                         )
-                       datePicker.datePicker.minDate=System.currentTimeMillis()
+                        var disableToday=8.64*10000000
+                       datePicker.datePicker.minDate=System.currentTimeMillis()+disableToday.toLong()
                         Log.d("timee",System.currentTimeMillis().toString())
-                        var day15=8.64*10000000*15
+                        var day15=8.64*10000000*14
                         datePicker.datePicker.maxDate=System.currentTimeMillis()+day15.toLong()
                        // datePicker.datePicker.maxDate=System.
                         datePicker.show()
                         try {
-                            //if (btn_Date.text != "Chose date") {
+                           {
                             val date = timeFormat.parse(btn_Date.text.toString())
                             now.time = date
-                            // }
+                             }
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
                     }
-
 
                     optionsSpinner=inflate.findViewById(R.id.spinn_booking_numPeople)
                     result=inflate.findViewById(R.id.res_spinner)
@@ -387,16 +388,9 @@ class BookingFragment(val user:Customer) : Fragment() {
                             id: Long
                         ) {
                             //Toast.makeText(context!!, "position : " + position, Toast.LENGTH_SHORT).show()
-                            Log.d("booking",arrayOptions[position].toString())
                             velicina=arrayOptions[position]
-                            Log.d("brojLjudi",arrayOptions[position].toString())
                             //result.text=arrayOptions[position].toString()
-                            result.text="Time of the day:"
-
-
-
-
-
+                           // result.text="Time of the day
                         }
                     }
 
