@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -44,6 +45,9 @@ class LoginFragment : Fragment() {
     var ownerListener:ValueEventListener?=null
     var waiterListener:ValueEventListener?=null
 
+    private var progressBar: ProgressBar? = null
+
+
     var uid:String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +73,8 @@ class LoginFragment : Fragment() {
         val btn_login = v.findViewById<View>(R.id.btn_login)
         val btn_go_to_register = v.findViewById<View>(R.id.btn_go_to_register)
         val btn_database_testing = v.findViewById<View>(R.id.btn_database_testing)
+        progressBar = v.findViewById<ProgressBar>(R.id.progress_Bar)
+        progressBar!!.visibility = View.GONE
 
         var email = v.et_email
         var password = v.et_password
@@ -217,7 +223,8 @@ class LoginFragment : Fragment() {
             return
         }
 
-        //showProgressBar()
+        progressBar!!.visibility = View.VISIBLE
+
 
         // [START sign_in_with_email]
         mAuth!!.signInWithEmailAndPassword(email, password)
@@ -247,7 +254,7 @@ class LoginFragment : Fragment() {
 
                 // [START_EXCLUDE]
 
-                //hideProgressBar()
+                progressBar!!.visibility = View.GONE
                 // [END_EXCLUDE]
             }
         // [END sign_in_with_email]
