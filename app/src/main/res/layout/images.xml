@@ -4,7 +4,8 @@
     android:layout_marginBottom="40dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="50dp">
     <ImageView
         android:id="@+id/iarrabbiata"
