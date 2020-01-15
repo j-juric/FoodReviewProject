@@ -111,26 +111,26 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
             var dish = i.getValue(Dish::class.java)
             arrayOfDishes!!.add(dish!!)
         }
-/*
-        for(i in 1..150){
-            var date:String = "2019"+ Random.nextInt(10,12).toString()+ (10+i%18).toString()
-            var numD= arrayOfDishes!!.size
+//        databaseRef!!.child("Reviews").removeValue()
+//        for(i in 1..150){
+//            var date:String = "2019"+ Random.nextInt(10,12).toString()+ (10+i%18).toString()
+//            var numD= arrayOfDishes!!.size
+//
+//
+//
+//            for(j in 1..5){
+//                var rate = Random.nextInt(3,6)
+//                var k = databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).push().key
+//                var r = Review(rate.toFloat() ,date,"")
+//                databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).child(k!!).setValue(r)
+//
+//            }
+//
+//
+//
+//            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
+//
+//        }
 
-
-
-            for(j in 1..5){
-                var rate = Random.nextInt(3,6)
-                var k = databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).push().key
-                var r = Review(rate.toFloat() ,date,"")
-                databaseRef!!.child("Reviews").child(arrayOfDishes!![i%numD].name).child(date!!).child(k!!).setValue(r)
-
-            }
-
-
-
-            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
-
-        }
-*/
     }
 }

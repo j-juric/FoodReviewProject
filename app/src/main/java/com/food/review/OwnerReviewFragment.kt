@@ -196,6 +196,7 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
             mapReview!!.put(key!!,lst)
         }
         Log.d(tagg,mapReview.toString())
+        Log.d(tagg,"ZAVRSIO SAM")
     }
 
 }
