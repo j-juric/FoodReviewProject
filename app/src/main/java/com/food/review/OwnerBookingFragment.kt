@@ -89,7 +89,7 @@ class OwnerBookingFragment : Fragment() {
         ljudi.add(covek2)
         ljudi.add(covek3)
         Log.d("asaa",ljudi.toString())
-        this.table= viewOfLayout.findViewById(R.id.tabela_booking)
+        //this.table= viewOfLayout.findViewById(R.id.tabela_booking)
         var i:Int=0
         ljudi!!.forEach { d ->
             var row = TableRow(this.context)
@@ -148,7 +148,7 @@ class OwnerBookingFragment : Fragment() {
                 alertDialog.show()
 
             }
-            this.table!!.addView(row)
+            //this.table!!.addView(row)
 
             ++i
         }}

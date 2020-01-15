@@ -101,7 +101,7 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
 
 
 
-        spn_dishes.adapter=ArrayAdapter<String>(activity!!,android.R.layout.simple_spinner_item,dishNames!!)
+        spn_dishes.adapter=ArrayAdapter<String>(activity!!,android.R.layout.simple_spinner_item,dishNames)
 
 
         spn_dishes.setOnItemSelectedListener(object : OnItemSelectedListener {
@@ -134,30 +134,33 @@ class OwnerReviewFragment(val arrayOfDishes: ArrayList<Dish>) : Fragment() {
             var i:Int=0
 
 
-            Log.d("TAG",mapReview.toString())
+            Log.d("TAGG",mapReview.toString())
             var id=selectedDish!!.name
-            var rlist = mapReview!!.getValue(id)!!
-            Log.d("TAG",rlist.toString())
-            rlist!!.forEach { d:Review->
-                var row = TableRow(activity!!)
-                row.layoutParams = TableRow.LayoutParams(
-                    TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.MATCH_PARENT,
-                    2.0f
-                )
+            var rlist = mapReview!!.getValue(id)
+            Log.d("TAGG",rlist.toString())
+            rlist.forEach { d:Review->
+                if(d.comment!=""){
+                    var row = TableRow(activity!!)
+                    row.layoutParams = TableRow.LayoutParams(
+                        TableRow.LayoutParams.MATCH_PARENT,
+                        TableRow.LayoutParams.MATCH_PARENT,
+                        2.0f
+                    )
 
-                var txtName = TextView(activity)
-                txtName.textSize = 23.0F
-                txtName.setTypeface(Typeface.MONOSPACE)
-                if(i%2==0)
-                    row.setBackgroundColor(Color.parseColor("#43C5A5"))
+                    var txtName = TextView(activity)
+                    txtName.textSize = 23.0F
+                    txtName.setTypeface(Typeface.MONOSPACE)
+                    if(i%2==0)
+                        row.setBackgroundColor(Color.parseColor("#43C5A5"))
 
-                txtName.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f)
-                val param1 = txtName.layoutParams as TableRow.LayoutParams
-                txtName.setText(d.comment)
-                txtName.gravity= Gravity.CENTER
-                row.addView(txtName)
-                this.table!!.addView(row)
+                    txtName.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f)
+                    //val param1 = txtName.layoutParams as TableRow.LayoutParams
+                    txtName.setText(d.comment)
+                    txtName.gravity= Gravity.CENTER
+                    row.addView(txtName)
+                    this.table!!.addView(row)
+                }
+
                 i++
             }
         }

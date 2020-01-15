@@ -104,7 +104,7 @@
         android:layout_marginTop="15dp"
 
         android:textColor="@android:color/white"
-        android:text="DATABASE TESTING"/>
+        android:text="QR CODE GENERATOR"/>
 
 
     <TextView

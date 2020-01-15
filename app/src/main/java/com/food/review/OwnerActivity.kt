@@ -42,7 +42,6 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
             }
             R.id.nav_reviews_owner -> {
 
-                .4
                 selectedFragment= OwnerReviewFragment(arrayOfDishes!!)
                 setTitle("Reviews")
             }
@@ -100,7 +99,7 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
             .setTitle("Closing Activity")
             .setMessage("Are you sure you want to log out?")
             .setPositiveButton("Yes",
-                DialogInterface.OnClickListener { dialog, which -> finish() })
+                DialogInterface.OnClickListener { _ , _ -> finish() })
             .setNegativeButton("No", null)
             .show()
     }
@@ -130,7 +129,7 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
 //
 //            //databaseRef!!.child("Reservations").child(date).setValue(tableList)
 //
-//        }
+
 
     }
 }
