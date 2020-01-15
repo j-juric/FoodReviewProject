@@ -31,11 +31,14 @@
         android:id="@+id/stars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:clickable="false"
         android:numStars="5"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        android:layout_gravity="center"
+
+        android:layout_below="@+id/show"
         />
 
 </FrameLayout>

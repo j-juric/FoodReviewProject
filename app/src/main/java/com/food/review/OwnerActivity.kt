@@ -32,7 +32,7 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
                 setTitle("Statistics")
             }
             R.id.nav_reviews_owner -> {
-                selectedFragment= OwnerReviewFragment()
+                selectedFragment= OwnerReviewFragment(arrayOfDishes!!)
                 setTitle("Reviews")
             }
             R.id.nav_reservations_owner -> {
