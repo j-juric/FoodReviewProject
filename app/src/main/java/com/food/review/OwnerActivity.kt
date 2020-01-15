@@ -10,6 +10,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlin.random.Random
+import android.content.DialogInterface
+
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.appcompat.app.AlertDialog
+import kotlin.system.exitProcess
+
 
 class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OwnerReviewFragment.OnFragmentInteractionListener {
     override fun onFragmentInteraction(uri: Uri) {
@@ -83,6 +91,18 @@ class OwnerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItem
         dref.addValueEventListener(postListener)
 
 
+    }
+
+    override fun onBackPressed() {
+
+        AlertDialog.Builder(this)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle("Closing Activity")
+            .setMessage("Are you sure you want to log out?")
+            .setPositiveButton("Yes",
+                DialogInterface.OnClickListener { dialog, which -> finish() })
+            .setNegativeButton("No", null)
+            .show()
     }
 
     fun getDishes(dataSnapshot:DataSnapshot){

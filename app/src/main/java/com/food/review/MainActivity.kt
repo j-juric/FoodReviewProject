@@ -1,5 +1,6 @@
 package com.food.review
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 
@@ -25,6 +27,18 @@ import com.google.firebase.database.FirebaseDatabase
 class MainActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionListener,RegisterFragment.OnFragmentInteractionListener/*, View.OnClickListener*/{
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onBackPressed() {
+
+        AlertDialog.Builder(this)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle("Closing Activity")
+            .setMessage("Are you sure you want to log out?")
+            .setPositiveButton("Yes",
+                DialogInterface.OnClickListener { dialog, which -> finish() })
+            .setNegativeButton("No", null)
+            .show()
     }
 
     //var login:Button?=null
