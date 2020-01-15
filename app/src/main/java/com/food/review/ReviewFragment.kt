@@ -71,9 +71,10 @@ fun draw(){
      )
 
      var txtName = TextView(applicationContext)
-     txtName.textSize = 24.0F
+     txtName.textSize = 23.0F
+     txtName.setTypeface(Typeface.MONOSPACE)
      if(i%2==0)
-         row.setBackgroundColor(Color.parseColor("#EEEEDD"))
+         row.setBackgroundColor(Color.parseColor("#43C5A5"))
 
      txtName.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f)
      val param1 = txtName.layoutParams as TableRow.LayoutParams

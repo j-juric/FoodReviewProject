@@ -27,10 +27,7 @@ import kotlin.collections.ArrayList
 import android.widget.Spinner
 import android.R.string.cancel
 import android.content.DialogInterface
-
-
-
-
+import java.time.LocalDateTime
 
 
 class BookingFragment(val user:Customer) : Fragment() {
@@ -77,9 +74,22 @@ class BookingFragment(val user:Customer) : Fragment() {
 
 
         //QUERY WHICH RETURNS DATA FOR THE NEXT 14 DAYS
+        var bbb=Date()
+        var ppp=bbb.toString()
+
+        var pp2=ppp.substring(4,7)
+        if (pp2=="Jan")
+            pp2="01"
+        if (pp2=="Feb")
+            pp2="02"
+        var pp1="2020"+pp2+ppp.substring(8,10)
+        Log.d("naaaaa",pp1)
         val last14days = databaseRef!!.child("Reservations").orderByKey()
-            .startAt("20200120")    //<---------- OVDE UNESI DANASNJI DATUM
+            .startAt(pp1)    //<---------- OVDE UNESI DANASNJI DATUM
+        var asd=Calendar.getInstance()
+
         //QUERY LISTENER
+
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -146,8 +156,6 @@ class BookingFragment(val user:Customer) : Fragment() {
                                 pesakLista.add(pesak.substring(pocetak, kraj))
                                 cunn++
                                 cc = 0
-
-
                             }
                             cunn++
                         }
@@ -313,10 +321,13 @@ class BookingFragment(val user:Customer) : Fragment() {
                         val datePicker = DatePickerDialog(
                             context!!, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                                 val selectedDate = Calendar.getInstance()
+
+
                                 selectedDate.set(Calendar.YEAR, year)
                                 selectedDate.set(Calendar.MONTH, month)
                                 selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                                 val date = formate.format(selectedDate.time)
+                                Log.d("datumm","u datetuime picker sam")
 
                                 //Toast.makeText(context!!, "Date : " + date, Toast.LENGTH_SHORT).show()
                                 //btn_Date.text=timeFormat.format(selectedDate.time)
@@ -332,6 +343,7 @@ class BookingFragment(val user:Customer) : Fragment() {
                                 Log.d("datum", pomocni3)
                                 var konacni=pomocni3+pomocni2+pomocni1
                                 Log.d("konacni", konacni)
+                                Log.d("datumm",konacni.toString())
                                 algoritamPre(konacni)
 
 
@@ -339,6 +351,11 @@ class BookingFragment(val user:Customer) : Fragment() {
                             },
                             now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
                         )
+                       datePicker.datePicker.minDate=System.currentTimeMillis()
+                        Log.d("timee",System.currentTimeMillis().toString())
+                        var day15=8.64*10000000*15
+                        datePicker.datePicker.maxDate=System.currentTimeMillis()+day15.toLong()
+                       // datePicker.datePicker.maxDate=System.
                         datePicker.show()
                         try {
                             //if (btn_Date.text != "Chose date") {
@@ -354,7 +371,7 @@ class BookingFragment(val user:Customer) : Fragment() {
                     optionsSpinner=inflate.findViewById(R.id.spinn_booking_numPeople)
                     result=inflate.findViewById(R.id.res_spinner)
                     val arrayOptions= arrayListOf<Int>()
-                    for(i in 1..25){
+                    for(i in 1..6){
 
                         arrayOptions+=i
                     }
